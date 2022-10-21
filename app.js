@@ -4,16 +4,15 @@ app.listen(3000, () => {
    console.log('Server listening on 3000');
 });
 
+app.use(express.static("dater"));
+
+/*
 app.get('/', function(req, res) {
-    //res.send('Hi Love');
     res.sendFile('index.html', { root: '.' });
+    //res.sendFile('style.css', { root: '.' });
   });
+  */
 
   app.get('/love', (req, res) => {
     res.send('Hi Love');
-  });
-
-  app.get('/signup.html', function(req, res) {
-    //res.send('Hi Love');
-    res.sendFile('html/signup.html', { root: '.' });
   });
