@@ -1,0 +1,128 @@
+html {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+}
+
+body {
+    margin: 0;
+    background: #545351;
+    width: 100vw;
+    height: 100vh;
+}
+
+.nav-container {
+    width: 100%;
+    background: darkgrey;
+    padding-left: 8%;
+    padding-right: 8%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 120px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.menu-icon {
+    width: 100px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+nav {
+    flex: 1;
+    text-align: right;
+}
+
+nav ul li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.3rem;
+}
+
+nav ul li a:hover {
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+}
+h2 {
+    text-align: center;
+    position: relative;
+    bottom: 50px;
+}
+
+#home-description {
+    display: block;
+    margin: 0 auto;
+}
+
+#home-img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 80vw;
+}
+
+#home-description > p {
+    width: 60%;
+    background: gray;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 10px;
+}
+
+#btnSignUp {
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    background: #545351;
+    font-size: 1.3rem;
+}
+
+@media only screen and (max-width: 700px) {
+    nav ul {
+        width: 100%;
+        background: #545351;
+        position: absolute;
+        top: 75px;
+        right: 0;
+        z-index: 2;
+    }
+    nav ul li {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    nav ul li a {
+        color: black;
+    }
+}
+
+#signup-form {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    background: darkgrey;
+    width: 40vw;
+    padding: 15px;
+}
