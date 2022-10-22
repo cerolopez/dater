@@ -37,3 +37,26 @@ function MyClientModule() {
   MyClientModule();
 // end example code
   */
+
+function MyFrontendModule() {
+
+
+    const button = document.getElementById('btnSignUp');
+    button.addEventListener('click', function(e) {
+    console.log('sign up button was clicked');
+
+    fetch('../signup.html', {method: 'POST'})
+        .then(function(response) {
+        if(response.ok) {
+            console.log('click was recorded');
+            return;
+        }
+        throw new Error('Request failed.');
+        })
+        .catch(function(error) {
+        console.log(error);
+        });
+    });
+}
+
+MyFrontendModule();

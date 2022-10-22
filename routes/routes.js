@@ -50,4 +50,25 @@ const dbTest = app.post('/signup', (req, res, next) => {
   run().catch(console.dir);
 });
 
+router.post('../signup.html', (req, res) => {
+
+  console.log("I've made it to the router")
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+
+  db.collection('users').insertOne({
+    name: name,
+    email: email,
+    password: password
+   }, (err, result) => {
+    if (err) {
+      return console.log(err);
+    }
+
+    console.log('insert was successful - user added');
+    res.sendStatus(201);
+  });
+});
+
 export default router;

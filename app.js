@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 app.use(express.static('public'));
 const { MongoClient } = require("mongodb");
@@ -16,6 +17,7 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (error, client) => {
   console.log("Connection established - All well");
   const db = client.db(databaseName);
 });
+
 
 // begin example code
 
