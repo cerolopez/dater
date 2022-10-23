@@ -31,33 +31,14 @@ router.get('/getUser', (req, res) => {
 
 // end example code
 
-const dbTest = app.post('/signup', (req, res, next) => {
-  console.log('testing');
-  async function run() {
-      try {
-          const database = client.db("insertDB");
-          const users = database.collection("users");
-          const doc = {
-              name: "Tim",
-              eyeColor: "brown"
-          }
-          const result = await users.insertOne(doc);
-          console.log('Successful insertion');
-      } finally {
-          await client.close();
-      }
-  }
-  run().catch(console.dir);
-});
-
-router.post('../signup.html', (req, res) => {
+router.post('/sign-up', (req, res) => {
 
   console.log("I've made it to the router")
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
 
-  db.collection('users').insertOne({
+  myDB.collection('users').insertOne({
     name: name,
     email: email,
     password: password

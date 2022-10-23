@@ -3,8 +3,12 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(express.static('public'));
 const { MongoClient } = require("mongodb");
-const uri = "mongodb+srv://fulltimers4real:gejg9wDDBJNgvMw@3rdwheel.ohwtksk.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://fulltimers4real:ejg9wDDBJgNgvMw@3rdwheel.ohwtksk.mongodb.net/?retryWrites=true&w=majority";
 const databaseName = "daterdb";
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+let db;
 
 app.listen(3000, () => {
     console.log('Server listening on 3000');
@@ -15,9 +19,31 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (error, client) => {
     return console.log("Connection failed for some reason");
   }
   console.log("Connection established - All well");
-  const db = client.db(databaseName);
+  db = client.db(databaseName);
+  
 });
 
+app.post('/sign-up', urlencodedParser, (req, res) => {
+
+  console.log("I've made it to the router")
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+
+  db.collection('users').insertOne({
+    name: name,
+    email: email,
+    password: password
+   }, (err, result) => {
+    if (err) {
+      return console.log(err);
+    }
+
+    console.log('insert was successful - user added from app.js');
+    console.log(res);
+    res.sendStatus(201);
+  });
+});
 
 // begin example code
 

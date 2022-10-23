@@ -38,25 +38,27 @@ function MyClientModule() {
 // end example code
   */
 
-function MyFrontendModule() {
 
 
-    const button = document.getElementById('btnSignUp');
-    button.addEventListener('click', function(e) {
-    console.log('sign up button was clicked');
+/*
+const button = document.getElementById('btnSignUp');
+button.addEventListener('click', function(e) {
+console.log('sign up button was clicked');
 
-    fetch('../signup.html', {method: 'POST'})
-        .then(function(response) {
+fetch('/sign-up', {method: 'POST'})
+    .then(function(response) {
         if(response.ok) {
             console.log('click was recorded');
+            console.log(response);
+
             return;
         }
+        console.log(response);
         throw new Error('Request failed.');
-        })
-        .catch(function(error) {
+    })
+    .catch(function(error) {
         console.log(error);
-        });
     });
-}
+});
 
-MyFrontendModule();
+*/
