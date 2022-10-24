@@ -45,6 +45,15 @@ app.post('/sign-up', urlencodedParser, (req, res) => {
   });
 });
 
+app.get('/login', urlencodedParser, (req, res) => {
+  // TODO -- finish get for logging in
+  const email = req.params.email;
+  const password = req.params.password;
+
+  console.log(`Email: ${email}, Password: ${password}`);
+
+})
+
 // app.post('new-date', urlencodedParser, (req, res) => {
 //     console.log('bout to post some date data');
 //     const dateName = req.body.name;

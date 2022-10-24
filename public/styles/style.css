@@ -126,3 +126,12 @@ h2 {
     width: 40vw;
     padding: 15px;
 }
+
+#login-form {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    background: darkgrey;
+    width: 40vw;
+    padding: 15px;
+}
