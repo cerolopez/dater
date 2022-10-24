@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DaterApp | Sign Up</title>
+        <meta name="description" content="New date form" />
+        <meta name="page-topic" content="Dating" />
+        <meta name="robots" content="index, follow" />
+        <link rel="icon" type="image/png" href="#" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    </head>
+    <body>
+        <header>
+            <div class="nav-container">
+                <div class="navbar">
+                    <img
+                        class="logo"
+                        src="images/logo.png"
+                        alt="Dater app logo"
+                        href="index.html"
+                    />
+                    <nav>
+                        <ul class="nav-links">
+                            <li><a href="#">Log in</a></li>
+                        </ul>
+                    </nav>
+                    <img class="menu-icon" src="images/menu-icon.png" />
+                </div>
+            </div>
+        </header>
+        <main>
+            <section id="title">
+                <h1>Sign Up</h1>
+            </section>
+            <section id="signup">
+                <form id="signup-form" action="/sign-up" method="post">
+                    <div class="mb-3">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" id="email" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password">Password:</label>
+                        <input type="text" name="password" id="password" />
+                    </div>
+                    <input id="btnSignUp" type="submit" value="submit" />
+                </form>
+            </section>
+        </main>
+        <footer><p>Made by Cecilia Lopez and Tim Crawley</p></footer>
+        <script type="text/javascript" src="scripts/frontend.js"></script>
+    </body>
+</html>
 
