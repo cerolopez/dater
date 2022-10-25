@@ -1,18 +1,18 @@
 html {
-    font-family: "Roboto", sans-serif;
+    font-family: "Public Sans", sans-serif;
     font-size: 20px;
 }
 
 body {
     margin: 0;
-    background: #545351;
+    background: white;
     width: 100vw;
     height: 100vh;
 }
 
 .nav-container {
     width: 100%;
-    background: darkgrey;
+    background: white;
     padding-left: 8%;
     padding-right: 8%;
     box-sizing: border-box;
@@ -62,9 +62,11 @@ h1 {
     text-align: center;
     font-size: 4rem;
     font-weight: bold;
+    font-family: "Source Serif Pro", serif;
 }
 h2 {
     text-align: center;
+    font-family: "Source Serif Pro", serif;
 }
 
 #home-description {
@@ -82,12 +84,16 @@ h2 {
 
 #home-description > p {
     width: 60%;
-    background: gray;
+    background: transparent;
     display: block;
     margin: 0 auto;
     margin-bottom: 20px;
     text-align: center;
     padding: 10px;
+}
+
+#home-description {
+    padding-bottom: 50px;
 }
 
 #btnSignUp {
@@ -132,4 +138,19 @@ h2 {
     width: 40vw;
     padding: 15px;
     border-radius: 5px;
+}
+
+#inverse-color {
+    color: white;
+}
+
+.black-row {
+    background-color: black;
+    text-align: left;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.black-col {
+    
 }
