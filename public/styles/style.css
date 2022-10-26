@@ -21,7 +21,7 @@
 
   h3 {
     font-size: 22px;
-    color: #431c5d;
+    color: black;
   }
 
   h5 {
@@ -54,6 +54,20 @@
   .sm-card {
     width: 20rem;
   }
+
+  .md-card {
+    width: 50rem;
+  }
+
+  .dash-card {
+    width: 20rem;
+    background-color: #CC4209;
+  }
+
+  .dash-row {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
   
   .navbar-custom {
     background-color: white; 
@@ -66,7 +80,7 @@
   
   .navbar-custom .navbar-brand:hover,
   .navbar-custom .navbar-text:hover {
-    color: #431c5d;
+    color: #FF8A5A;
   }
   
   .nav-link {
@@ -74,7 +88,7 @@
   }
   
   .nav-link:hover {
-    color: #431c5d;
+    color: #FF8A5A;
   }
   
   .header-row {
@@ -128,4 +142,9 @@
 #under-btn {
     text-align: center;
     font-size: 12px;
+}
+
+#dash-header {
+    text-align: center;
+    padding-top: 50px;
 }
