@@ -45,10 +45,18 @@ app.post('/sign-up', urlencodedParser, (req, res) => {
   });
 });
 
-app.get('/login', urlencodedParser, (req, res) => {
+app.post('/login', urlencodedParser, async (req, res) => {
   // TODO -- finish get for logging in
-  const email = req.params.email;
-  const password = req.params.password;
+  const email = req.body.email;
+  const password = req.body.password;
+
+  const query = {email: email, password: password};
+  const cursor = await db.collection('users').find(query);
+  if (cursor) {
+    res.redirect("/dashboard.html");
+  } else {
+    res.status(404).send();
+  }
 
   console.log(`Email: ${email}, Password: ${password}`);
 
