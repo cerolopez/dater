@@ -1,93 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>DaterApp | Home</title>
-        <meta
-            name="description"
-            content="An app to help users define their new relationships."
-        />
-        <meta name="page-topic" content="Dating" />
-        <meta name="robots" content="index, follow" />
-        <link rel="icon" type="image/png" href="images/logo.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" type="text/css" href="styles/style.css" />
-    </head>
-    <body>
-        <header>
-            <div class="nav-container">
-                <div class="navbar">
-                    <img
-                        class="logo"
-                        src="images/logo.png"
-                        alt="Dater app logo"
-                    />
-                    <nav>
-                        <ul class="nav-links">
-                            <li><a href="login.html">Log in</a></li>
-                        </ul>
-                    </nav>
-                    <img class="menu-icon" src="images/menu-icon.png" />
-                </div>
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <img
-                        id="home-img"
-                        src="images/hero-image.jpeg"
-                        alt="two people sharing headphones and smiling while facing each other"
-                    />
-                    </div>
-                </div>
-            </div>
-            <section class="container-fluid" id="title">
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="An app to help users define their new relationships."/>
+    <meta name="page-topic" content="Dating" />
+    <meta name="robots" content="index, follow" />
+    <title>Dater</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" /> 
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+  </head>
 
-                <h2>For after the first date</h2>
-            </section>
-        </header>
-        <main>
-            <div class="container-fluid" id="home-description">
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Labore omnis consequuntur voluptas modi, eaque voluptatibus
-                            laudantium iure iusto nisi eveniet? Minus odio mollitia ea
-                            quos ullam atque, qui sint illo.
-                        </p>
-                        <button
-                            id="btnSignUp"
-                            onclick="window.location.href='signup.html'"
-                        >
-                            Sign up
-                        </button>
-                    </div>
-                </div>
+<!-- Page content -->
+
+<body>
+  <!-- Begin nav bar -->
+  <nav class="navbar navbar-expand-sm navbar-custom fixed-top">
+    <a href="index.html" class="navbar-brand">Dater</a>
+    <button class="navbar-toggler custom-toggler" data-toggle="collapse" data-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="login.html" class="nav-link">Log In</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Begin header -->
+  <header>
+    <section class="container-fluid">
+      <div class="row header-row">
+        <img id="home-img" src="images/hero-image.jpeg" class="img-fluid" alt="two people sharing headphones and smiling while facing each other" />
+      </div>
+    </section>
+  </header>
+
+  <!-- Begin main content-->
+  <main>
+    <!-- Section 1 -->
+  <section class="container-fluid white-container">
+    <div class="row tagline">
+        <div class="col-md-12">
+            <h2><strong>For after the first date</strong></h2>
+        </div>
+    </div>
+    <div class="row mx-sm-0 mx-md-5">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <p><br>
+                Modern dating is full of unanswered questions. When you meet someone new, 
+                it's hard to work up the courage to ask — and answer — hard questions. 
+                Am I into them? Are they into me? Is there something here?
+
+                <br><br>That's where we come in. At Dater, we believe the most difficult conversations 
+                are also the most important ones. Our philosophy to dating is to keep it real, 
+                open, and brave — both ways. You up for it?
+            </p>
+        </div>
+    </div>
+    <div class="row button-row">
+        <div class="col">
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn" id="btnSignUp" onclick="window.location.href='signup.html'">Sign Up</button>
             </div>
-            <div class="container-fluid" id="how-to">
-                <div class="row black-row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8 black-col">
-                        <h2 id="inverse-color">How It Works</h2>
-                        <p id="inverse-color">
-                            Step 1: Ghost-me-not <br>Log a date. We recommend talking about it with your date first. (Tip: We make a good conversation topic on a first date.)
-                            <br><br>Step 2: Be open<br>Answer some questions about how your date went. Your answers will only be revealed to your date if they answer the same ones.
-                            <br><br>Step 3: Good luck<br>Once your both answer questions, take a look and see where you both stand.
-                        </p>
-                    </div>
-                </div>
+        </div>
+    </div>
+    </section>
+    <!-- Section 2 -->
+    <section class="container-fluid black-container">
+      <div class="row mx-sm-0 mx-md-5">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h2 id="inverse-color">How It Works</h2>
+            <br>
+            <h3 id="inverse-color">Step 1: Ghost-me-not</h3>
+            <p id="inverse-color">Log a date. We recommend talking about it with your date first. (Tip: We make a good conversation topic on a first date.)</p>
+            <h3 id="inverse-color">Step 2: Be open</h3>
+            <p id="inverse-color">Answer some questions about how your date went. Your answers will only be revealed to your date if they answer the same ones.</p>
+            <h3 id="inverse-color">Step 3: Good luck</h3>
+            <p id="inverse-color">Once your both answer questions, take a look and see where you both stand.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Begin footer -->
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                <h5>2022 Dater (c)</h5>
             </div>
-        </main>
-        <footer><p>Made by Cecilia Lopez and Tim Crawley</p></footer>
-        <script type="text/javascript" src="script.js"></script>
-    </body>
+          </div>
+          <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                <h5>Made by Cecilia Lopez and Tim Crawley</h5>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+<script type="text/javascript" src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+</body>
 </html>
