@@ -3,9 +3,13 @@
     font-size: 20px;
   }
 
+  body {
+    background-color: #FFB698;
+  }
+
   h1 {
     text-align: center;
-    font-size: 4rem;
+    font-size: 46px;
     font-weight: bold;
     font-family: "Source Serif Pro", serif;
   }
@@ -28,18 +32,31 @@
   footer {
     padding-top: 25px;
     height: 100px;
+    background-color: white;
+  }
+
+  a {
+    color: #CC4209;
+  }
+
+  a:hover {
+    color: #FF8A5A;
   }
 
   .container-fluid {
-    background-color: #fff;
+    background-color: white;
   }
 
   .tagline {
     padding-top: 25px;
   }
+
+  .sm-card {
+    width: 20rem;
+  }
   
   .navbar-custom {
-    background-color: #ffffff; 
+    background-color: white; 
   }
   
   .navbar-custom .navbar-brand,
@@ -63,9 +80,14 @@
   .header-row {
     padding-top: 25px;
   }
+
+  .no-hero-img {
+    padding-top: 100px;
+    background-color: #FFB698;
+  }
   
   .white-container {
-    background-color: transparent;
+    background-color: white;
     padding-bottom: 50px;
     padding-top: 10px;
   }
@@ -74,6 +96,12 @@
     background-color: black;
     padding-top: 50px;
     padding-bottom: 50px;
+  }
+
+  .trans-container {
+    background-color: transparent;
+    padding-top: 25px;
+    padding-bottom: 100px;
   }
   
   .custom-toggler .navbar-toggler-icon {
@@ -90,8 +118,14 @@
 
   #btnSignUp {
     background-color: #FFB698;
+    color: black;
   }
 
   #inverse-color {
     color: white;
+}
+
+#under-btn {
+    text-align: center;
+    font-size: 12px;
 }
