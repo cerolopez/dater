@@ -64,9 +64,14 @@
     background-color: #CC4209;
   }
 
+  .card-group {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
   .dash-row {
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   
   .navbar-custom {
@@ -146,9 +151,17 @@
 
 #dash-header {
     text-align: center;
-    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 #inverse-hyperlink {
     color: white;
+}
+
+.sign-out {
+    padding-top: 100px;
+}
+
+.loadMoreRow {
+    padding-top: 50px;
 }
