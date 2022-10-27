@@ -51,7 +51,7 @@ app.post('/login', urlencodedParser, async (req, res) => {
   const password = req.body.password;
 
   const query = {email: email, password: password};
-  const cursor = await db.collection('users').find(query);
+  const cursor = await db.collection('users').find(query).toArray();
   const record = cursor[0];
   if (record) {
     res.redirect("/dashboard.html");
