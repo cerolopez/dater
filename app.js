@@ -52,10 +52,13 @@ app.post('/login', urlencodedParser, async (req, res) => {
 
   const query = {email: email, password: password};
   const cursor = await db.collection('users').find(query);
-  if (cursor) {
+  const record = cursor[0];
+  if (record) {
     res.redirect("/dashboard.html");
   } else {
+    res.redirect("/login.html");
     res.status(404).send();
+
   }
 
   console.log(`Email: ${email}, Password: ${password}`);
