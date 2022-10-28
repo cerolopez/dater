@@ -1,19 +1,36 @@
-require('dotenv').config();
+//require('dotenv').config();
+import {} from "dotenv/config";
 
-const express = require('express');
-const bodyParser = require('body-parser');
+import express from "express";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+
+import router from "./routes/routes.js";
+
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
 app.use(express.static('public'));
-const { MongoClient } = require("mongodb");
+app.use(
+  session({
+    secret: "New session",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {}
+  })
+);
 
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-let db;
+//Code for router 
+app.use("/", router);
 
 app.listen(3000, () => {
     console.log('Server listening on 3000');
  });
 
+ /* 
 MongoClient.connect(process.env.URI, { useNewUrlParser: true }, (error, client) => {
   if (error) {
     return console.log("Connection failed for some reason");
@@ -22,7 +39,11 @@ MongoClient.connect(process.env.URI, { useNewUrlParser: true }, (error, client) 
   db = client.db(process.env.DATABASE_NAME);
   
 });
+*/
 
+
+
+/*
 app.post('/sign-up', urlencodedParser, (req, res) => {
 
   console.log("I've made it to the router")
@@ -64,6 +85,9 @@ app.post('/login', urlencodedParser, async (req, res) => {
   console.log(`Email: ${email}, Password: ${password}`);
 
 })
+*/
+
+
 
 // app.post('new-date', urlencodedParser, (req, res) => {
 //     console.log('bout to post some date data');
