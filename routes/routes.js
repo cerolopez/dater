@@ -78,6 +78,17 @@ router.get('/getUser', (req, res) => {
   res.json({ user: req.session.user });
 });
 
+router.post('/new-date', async (req, res) => {
+  console.log("About to log a new date");
+  const email = req.body.email;
+  const date = req.body.date;
+
+  const newDate = await datesDB.createDate(email, date);
+  res.json(newDate);
+})
+
+export default router;
+
 /*
 router.post('/sign-up', (req, res) => {
 
