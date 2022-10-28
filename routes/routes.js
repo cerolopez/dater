@@ -6,27 +6,32 @@ import myDB from "../db/MyMongoDB.js";
 //Is this needed??
 //export const PORT = process.env.PORT || 3000;
 
-import bodyParser from "body-parser";
+//import bodyParser from "body-parser";
 
 
 // begin example code
 
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
+// const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-router.post('/sign-up', urlencodedParser, (req, res) => {
-
-  console.log("I've made it to the router")
+router.post('/sign-up', async (req, res) => {
+  const user = req.body;
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
 
-  const result = myDB.createUser(name, email, password);
+  //const isUnique = await myDB.uniqueEmail(email);
 
-  if (!result) {
-    console.log("Didn't work... sorry!");
+  let result = await myDB.createUser(name, email, password);
+  
+  console.log(result);
+
+  if (result) {
+    req.session.user = {user: user};
+    res.json({isCreated: true, isLoggedIn: true, err: null});
+    console.log(req.session);
   } else {
-    console.log("Everything went well! Create user was successful");
-    res.sendStatus(201);
+    req.session.user = null;
+    res.json({ isCreated: false, isLoggedIn: false, err: "An account is already registered with given email. Try again." });
   }
 
   // db.collection('users').insertOne({
@@ -73,11 +78,9 @@ router.get('/getUser', (req, res) => {
   res.json({ user: req.session.user });
 });
 
-// end example code
-
+/*
 router.post('/sign-up', (req, res) => {
 
-  console.log("I've made it to the router")
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
@@ -95,5 +98,5 @@ router.post('/sign-up', (req, res) => {
     res.sendStatus(201);
   });
 });
-
+*/
 export default router;

@@ -11,12 +11,12 @@ function MyMongoDB() {
   // Need to utilize the following collections 
   const DATE_COLLECTION = "dates";
   // ... any other collections? form questions, date_responses, 
-
+  
   myDB.authenticate = async (user) => {
     let client; 
     
     try {
-      client = new MongoClient(url);
+      client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
       const usersCol = db.collection(USER_COLLECTION);
@@ -36,15 +36,15 @@ function MyMongoDB() {
 
   };
   
-  // Will only be used within the module 
-  async function isUniqueEmail(email) {
-    let client;
+  async function _isUniqueEmail(client, email) {
+    //let client;
     try {
-      client = new MongoClient(url);
-      await client.connect();
+      //client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+      //await client.connect();
       const db = client.db(DB_NAME);
       const usersCol = db.collection(USER_COLLECTION);
-      const res = usersCol.find({email: email});
+      const cursor = usersCol.find({email: email}).toArray();
+      const res = cursor[0];
       // If res is undefined, return true. Else return false
       return (res ? false : true); 
       
@@ -54,21 +54,24 @@ function MyMongoDB() {
     }
   };
 
-  myDB.createUser = async (username, email, password) => {
+  myDB.createUser = async (userName, email, password) => {
     let client;
     try {
-      client = new MongoClient(url);
-      if (!isUniqueEmail(email)) {
-        return false;
-      }
-
+      client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+      await client.connect();
       const db = client.db(DB_NAME);
       const usersCol = db.collection(USER_COLLECTION);
       const user = {
-        name: username,
+        name: userName,
         email: email,
         password: password
       }
+      const cursor = await usersCol.find({ email: user.email }).toArray();
+      if (cursor.length >= 1) {
+        return false;
+      }
+
+      
       console.log("Attempting to create a new user");
       
       const res = await usersCol.insertOne(user);
@@ -80,8 +83,26 @@ function MyMongoDB() {
       console.log("Closing the connection");
       client.close();
     }
-    
+  }
+
+  myDB.uniqueEmail = async (email) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const usersCol = db.collection(USER_COLLECTION);
+      const cursor = usersCol.find({email: email}).toArray();
+      const res = cursor[0];
+      // If res is undefined, return true. Else return false
+      return (res ? false : true); 
+      
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
   };
+
 
   return myDB;
 }

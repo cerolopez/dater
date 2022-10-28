@@ -2,7 +2,7 @@ import clientUtil from "./clientUtilities.js";
 
 function ClientLogin() {
     const clientLogin = {};
-    const divMsg = document.querySelector("div#msgBadCred");
+    const divMsg = document.querySelector("div#msg");
 
     let currentUser = null;
 
@@ -48,9 +48,7 @@ function ClientLogin() {
                 if (resUser.isLoggedIn) {
                     clientUtil.redirect("dashboard");
                 } else {
-                    console.log("before redirect");
                     clientUtil.showMessage(divMsg, resUser.err);
-                    console.log("after redirect");
                 }
             } catch (err) {
                 console.log(err);
