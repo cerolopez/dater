@@ -29,6 +29,7 @@ function ClientDates() {
     }
 
     async function createDate() {
+        // TODO: ADD LOGIC TO CHECK IF USER EXISTS
         let res;
         try {
             res = await fetch("./createDate");
