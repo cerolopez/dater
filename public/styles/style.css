@@ -166,3 +166,6 @@
 .loadMoreRow {
     padding-top: 50px;
 }
+div#msgBadCred {
+  display: none;
+}
