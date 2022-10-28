@@ -2,6 +2,7 @@ import express from 'express';
 let router = express.Router();
 
 import myDB from "../db/MyMongoDB.js";
+import datesDB from "../db/datesDB.js";
 
 //Is this needed??
 //export const PORT = process.env.PORT || 3000;
@@ -86,8 +87,6 @@ router.post('/new-date', async (req, res) => {
   const newDate = await datesDB.createDate(email, date);
   res.json(newDate);
 })
-
-export default router;
 
 /*
 router.post('/sign-up', (req, res) => {
