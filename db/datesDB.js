@@ -44,8 +44,6 @@ function datesDB() {
           const res = await datesCollection.insertOne(newDate);
           console.log("Inserted", res);
           return true;
-    
-    
         } finally {
           console.log("Closing the connection");
           client.close();
