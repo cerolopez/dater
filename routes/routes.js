@@ -88,6 +88,11 @@ router.post('/new-date', async (req, res) => {
   res.json(newDate);
 })
 
+router.post('/submit-survey', async (req, res) => {
+  console.log("About to submit a survey response");
+  
+})
+
 /*
 router.post('/sign-up', (req, res) => {
 
