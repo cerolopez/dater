@@ -10,7 +10,7 @@ function MyMongoDB() {
   
   // Need to utilize the following collections 
   const DATE_COLLECTION = "dates";
-  // ... any other collections?
+  // ... any other collections? form questions, date_responses, 
 
   myDB.authenticate = async (user) => {
     let client; 
@@ -20,9 +20,12 @@ function MyMongoDB() {
       await client.connect();
       const db = client.db(DB_NAME);
       const usersCol = db.collection(USER_COLLECTION);
-      console.log(`Searching for, ${user}...`);
-      const res = await usersCol.findOne({ email: user.email });
-      console.log("res", res, res.password === user.password);
+      console.log(`Searching for user w/ email ${user.email}...`);
+      const cursor = await usersCol.find({ email: user.email }).toArray();
+      if (cursor.length < 1) {
+        return false;
+      }
+      const res = cursor[0];
       if (res.password === user.password) return true;
       return false;
 
