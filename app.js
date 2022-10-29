@@ -19,7 +19,7 @@ app.use(
     secret: "New session",
     resave: false,
     saveUninitialized: false,
-    cookie: {}
+    cookie: {maxAge: 360000},
   })
 );
 

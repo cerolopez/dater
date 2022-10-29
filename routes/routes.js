@@ -54,11 +54,14 @@ router.post('/authenticate(.html)?', async (req, res) => {
   const user = req.body;
 
   // TODO check that we got the correct info
-
+  
   if (await myDB.authenticate(user)) {
-    req.session.user = {user: user};
-    res.json({isLoggedIn: true, err: null});
+    // NEW ADDITION
+    req.session.user = user;
+    req.session.user.isLoggedIn = true;
+    //
     console.log(req.session);
+    res.json({isLoggedIn: true, err: null});
   } else {
     req.session.user = null;
     res.json({ isLoggedIn: false, err: "Wrong email or password." });
@@ -71,9 +74,6 @@ router.post('/authenticate(.html)?', async (req, res) => {
 //   }
 // });
 
-router.get('/users', (req, res) => {
-  res.send("Users will be here!");
-});
 
 router.get('/getUser', (req, res) => {
   res.json({ user: req.session.user });
@@ -87,11 +87,6 @@ router.post('/new-date', async (req, res) => {
   const newDate = await datesDB.createDate(email, date);
   res.json(newDate);
 })
-
-// router.post('/create-survey', async (req, res) => {
-//   console.log("About to submit a survey response");
-//   const survey = req.body;
-//   const newSurvey = await 
 
 /*
 router.post('/sign-up', (req, res) => {

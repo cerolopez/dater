@@ -1,8 +1,11 @@
+import clientUtil from "./clientUtilities.js";
+
 function ClientDashboard() {
     const clientDash = {};
-    function checkIfLoggedIn(user) {
-        
-    }
-
+    
+    // testing out getCurrentUser
+    clientDash.getCurrentUser = clientUtil.getCurrentUser;
     return clientDash;
 }
+
+export default ClientDashboard();
