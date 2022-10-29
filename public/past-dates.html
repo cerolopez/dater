@@ -63,10 +63,18 @@
                     <!-- TODO: LEAVE BLANK BUT RENDER THIS HTML/CSS UPON LOAD -->
                     <div class="row dash-row">
                         <div class="col-md-4">
+                            <div class="div" id="newDateContent"></div>
+                            
+                            <!--
+                            <div class="d-flex justify-content-center">
+                                <div class="div" id="newDateContent"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="d-flex justify-content-center">
                                 <div class="card dash-card text-center">
                                     <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href="">Name 1</a> &#9203;</h3>
+                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href=""><div id="newDateContent"></div></a> &#9203;</h3>
                                         <p id="inverse-color">[date goes here]</p>
                                     </div>
                                 </div>
@@ -76,17 +84,7 @@
                             <div class="d-flex justify-content-center">
                                 <div class="card dash-card text-center">
                                     <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href="">Name 2</a> &#9203;</h3>
-                                        <p id="inverse-color">[date goes here]</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="d-flex justify-content-center">
-                                <div class="card dash-card text-center">
-                                    <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href="">Name 3</a> &#9989;</h3>
+                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href=""><div id="newDateContent"></div></a> &#9989;</h3>
                                         <p id="inverse-color">[date goes here]</p>
                                     </div>
                                 </div>
@@ -98,7 +96,7 @@
                             <div class="d-flex justify-content-center">
                                 <div class="card dash-card text-center">
                                     <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href="">Name 4</a> &#9989;</h3>
+                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href=""><div id="newDateContent"></div></a> &#9989;</h3>
                                         <p id="inverse-color">[date goes here]</p>
                                     </div>
                                 </div>
@@ -108,7 +106,7 @@
                             <div class="d-flex justify-content-center">
                                 <div class="card dash-card text-center">
                                     <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href="">Name 5</a> &#128172;</h3>
+                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href=""><div id="newDateContent"></div></a> &#128172;</h3>
                                         <p id="inverse-color">[date goes here]</p>
                                     </div>
                                 </div>
@@ -118,11 +116,12 @@
                             <div class="d-flex justify-content-center">
                                 <div class="card dash-card text-center">
                                     <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href="">Name 6</a> &#9203;</h3>
+                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href=""><div id="newDateContent"></div></a> &#9203;</h3>
                                         <p id="inverse-color">[date goes here]</p>
                                     </div>
                                 </div>
                             </div>
+                            -->
                         </div>
                     </div>
                     <div class="row loadMoreRow">
@@ -156,8 +155,11 @@
         </div>
       </footer>
 
-<script type="text/javascript" src="script.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      <script type="module">
+        import clientDates from "./scripts/clientDates.js";
+        clientDates.fetchDates();
+        </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
   crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
   crossorigin="anonymous"></script>
