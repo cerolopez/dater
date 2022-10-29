@@ -1,44 +1,45 @@
 function ClientDates() {
+    const clientDates = {};
 
-    let currentUser = null;
+    /*
+    const datesDiv = document.querySelector("div#newDateContent");
 
-    // this makes the dates show up in past-dates.html
-    function renderDates(dates) {
-        const divContent = document.querySelector("#dateContent");
-        divContent.innerHTML = `
-        <p>html will go here</p>
-        ${dates.map((d) => `<div>Name: ${d.name}</div>.join(")`)}
+    function renderDates() {
+      // do something
+      const dates = ["Reggie", "Rocky", "Bobby"];
+
+      datesDiv.innerHTML = "";
+      console.log("render dates", dates);
+      for (let d of dates) {
+        const dDiv = document.createElement("div");
+  
+        dDiv.innerHTML = `
+
+          <div class="d-flex justify-content-center">
+          <div class="card dash-card text-center">
+          <div class="card-body">
+            <h3 id="inverse-color"><a id="inverse-hyperlink" href="">${d}</a></h3>
+            <p id="inverse-color">[date goes here]</p>
+          </div>
+          </div>
+          </div>
+
         `;
+  
+        datesDiv.appendChild(dDiv);
+      }
     }
 
-    function renderNewDates(dateID) {
-        const divContent = document.querySelector('#newDateContent');
-        divContent.innerHTML = ``;
-    }
+    */
 
-    // this gets the dates and then calls renderDates
-    async function getDates() {
-        let res;
-        try {
-            res = await fetch("./getDates");
-            const dates = await res.json();
-            renderDates(dates);
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    //renderDates();
 
-    async function createDate() {
-        // TODO: ADD LOGIC TO CHECK IF USER EXISTS
-        let res;
-        try {
-            res = await fetch("./createDate");
-            const newDate = await res.json();
-            renderNewDates(newDate.date);
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    clientDates.fetchDates = async () => {
+        console.log("I'm in clientDates.js");
+        const res = await fetch('./getDates');
+        console.log("I'm in clientDates.js", res);
+      }
+    return clientDates;
 }
 
 export default ClientDates();
