@@ -1,13 +1,14 @@
 import express from 'express';
-let router = express.Router();
+const router = express.Router();
 
 import myDB from "../db/MyMongoDB.js";
 import datesDB from "../db/datesDB.js";
+import surveyDB from "../db/surveyDB.js";
 
 //Is this needed??
 //export const PORT = process.env.PORT || 3000;
 
-//import bodyParser from "body-parser";
+import bodyParser from "body-parser";
 
 
 // begin example code
@@ -88,6 +89,23 @@ router.post('/new-date', async (req, res) => {
   res.json(newDate);
 })
 
+router.post('/create-survey', async (req, res) => {
+  console.log('About to submit a survey response');
+  const survey = req.body;
+  const newSurvey = await surveyDB.createSurvey(survey);
+  res.json(newSurvey);
+});
+
+router.get('/getDates', async (req, res) => {
+  console.log("About to grab a date");
+  console.log("params", req.query);
+  const dates = req.query;
+  const datesQ = await datesDB.getDates({}, dates);
+  res.json(datesQ);
+
+});
+
+
 /*
 router.post('/sign-up', (req, res) => {
 
@@ -109,4 +127,6 @@ router.post('/sign-up', (req, res) => {
   });
 });
 */
+
+
 export default router;
