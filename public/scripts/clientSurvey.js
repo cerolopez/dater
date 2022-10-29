@@ -1,3 +1,4 @@
+/*
 function ClientSurvey() {
     const userSideContent = document.querySelector('span#currentUserSide');
     const dateSideContent = document.querySelector('span#dateSide');
@@ -29,3 +30,4 @@ function ClientSurvey() {
 }
 
 export default ClientSurvey();
+*/
