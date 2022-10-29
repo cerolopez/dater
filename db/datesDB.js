@@ -4,30 +4,31 @@ function datesDB() {
     const datesDB = {};
     const url = process.env.URI || "mongodb://localhost:27017";
     const DB_NAME = "daterdb";
-    const USER_COLLECTION = "dates";
+    const DATE_COLLECTION = "dates";
     const PAGE_SIZE = 6;
 
-    datesDB.getDates = async (query = {}, page = 0) => {
+
+    datesDB.getDates = async function (query = {}) {
         let client;
 
         try {
             client = new MongoClient(url);
-            const userDates = client.db(DB_NAME).collection(DATES_DB);
-            console.log("searching for dates belonging to", user);
+            const datesCollection = client.db(DB_NAME).collection(DATE_COLLECTION);
+            console.log("searching for dates...", query);
             
             // query will be user ID
-            return await userDates
+            return await datesCollection.find(query).toArray();
             // figure out how to query based on object ID
-            //.find(query: "dates")
-            .skip(PAGE_SIZE * page)
-            .limit(PAGE_SIZE)
-            .toArray()
+            //.skip(PAGE_SIZE * page)
+            //.limit(PAGE_SIZE)
         } finally {
             console.log("getDates: closing DB connection");
             client.close;
         }
+
     };
 
+    /*
     datesDB.createDate = async (email, date) => {
         let client;
         try {
@@ -50,6 +51,7 @@ function datesDB() {
         }
         
       };    
+      */
 
       return datesDB;
     }
