@@ -4,13 +4,12 @@ function ClientDates() {
     const datesDiv = document.querySelector("div#newDateContent");
 
     // TODO: FIX RENDERING OF DATES
-    function renderDates () {
+    function renderDates (userDates) {
       // do something
-      console.log("I'm in renderDates");
-      const dates = fetchDates();
+      datesDiv.innerHTML = '';
+      console.log("I'm in renderDates: ", userDates);
+      console.log(`First date: ${userDates.at(0).date}`);
 
-      const userDates = dates[0];
-      console.log(userDates);
     }
 
       /*
@@ -46,15 +45,15 @@ function ClientDates() {
     }
     */
 
-
-    renderDates();
-
     async function fetchDates () {
         const res = await fetch('./getDates');
         console.log("I'm in clientDates.js", res);
-        return res;
+        const dates = await res.json();
+
+        renderDates(dates);
       }
     
+    fetchDates();
     return clientDates;
 }
 
