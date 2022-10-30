@@ -1,4 +1,5 @@
 import express from 'express';
+
 const router = express.Router();
 
 import myDB from "../db/MyMongoDB.js";
@@ -96,12 +97,21 @@ router.post('/create-survey', async (req, res) => {
   res.json(newSurvey);
 });
 
+// TODO: MAKE ROUTE GET CORRECT DATA
 router.get('/getDates', async (req, res) => {
-  console.log("About to grab a date");
-  console.log("params", req.query);
-  const dates = req.query;
-  const datesQ = await datesDB.getDates({}, dates);
-  res.json(datesQ);
+  console.log("I'm in the /getDates route");
+
+  // gets data from datesDB.js and sends it to clientDates.js
+  return res.json(datesDB.getDatesByUser(req.session.user));
+
+});
+
+// TODO: MAKE ROUTE GET CORRECT DATA
+router.get('/getDate', async (req, res) => {
+  console.log("I'm in the /getDate route");
+  
+  // gets data from datesDB.js and sends it to clientDates.js
+  return res.json(datesDB.getDates(req.session.user));
 
 });
 
