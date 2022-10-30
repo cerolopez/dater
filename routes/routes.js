@@ -101,8 +101,10 @@ router.post('/create-survey', async (req, res) => {
 router.get('/getDates', async (req, res) => {
   console.log("I'm in the /getDates route");
 
+  const dates = await datesDB.getDatesArray(req.session.user);
+
   // gets data from datesDB.js and sends it to clientDates.js
-  return res.json(datesDB.getDatesByUser(req.session.user));
+  res.json(dates);
 
 });
 
