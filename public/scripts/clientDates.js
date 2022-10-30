@@ -1,13 +1,27 @@
 function ClientDates() {
     const clientDates = {};
 
-    /*
     const datesDiv = document.querySelector("div#newDateContent");
 
-    function renderDates() {
+    function renderDates () {
       // do something
-      const dates = ["Reggie", "Rocky", "Bobby"];
+      console.log("I'm in renderDates");
+      const dates = fetchDates();
 
+      const reggieDates = dates[0];
+      console.log(reggieDates);
+    }
+
+      /*
+      for (let step = 0; step < 7; step++) {
+          reggieDates = dates[step];
+          if (reggieDates !== undefined) {
+              console.log(reggieDates);
+          }
+      }
+    }
+    
+      
       datesDiv.innerHTML = "";
       console.log("render dates", dates);
       for (let d of dates) {
@@ -29,16 +43,17 @@ function ClientDates() {
         datesDiv.appendChild(dDiv);
       }
     }
-
     */
 
-    //renderDates();
 
-    clientDates.fetchDates = async () => {
-        console.log("I'm in clientDates.js");
+    renderDates();
+
+    async function fetchDates () {
         const res = await fetch('./getDates');
         console.log("I'm in clientDates.js", res);
+        return res;
       }
+    
     return clientDates;
 }
 
