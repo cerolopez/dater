@@ -3,20 +3,21 @@ function ClientDates() {
 
     const datesDiv = document.querySelector("div#newDateContent");
 
+    // TODO: FIX RENDERING OF DATES
     function renderDates () {
       // do something
       console.log("I'm in renderDates");
       const dates = fetchDates();
 
-      const reggieDates = dates[0];
-      console.log(reggieDates);
+      const userDates = dates[0];
+      console.log(userDates);
     }
 
       /*
       for (let step = 0; step < 7; step++) {
-          reggieDates = dates[step];
-          if (reggieDates !== undefined) {
-              console.log(reggieDates);
+          userDates = dates[step];
+          if (userDates !== undefined) {
+              console.log(userDates);
           }
       }
     }
