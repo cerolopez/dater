@@ -3,6 +3,8 @@ import path from 'path';
 //import { fileURLToPath } from 'url';
 
 // const __filename = fileURLToPath(import.meta.url);
+
+// move this to app.js so i can use above
 const __dirname = '/Users/cecilialopez/Desktop/web-dev/dater-app/dater';
 
 const router = express.Router();
@@ -98,6 +100,8 @@ router.post("/update-account", async (req, res) => {
 
 
 router.get('/getUser', (req, res) => {
+
+  // can we query the DB and add the user's name?
   res.json({ user: req.session.user });
   // TESTING
   console.log("User: ", req.session.user);
@@ -108,16 +112,15 @@ router.post('/submit-survey', async (req, res) => {
   const survey = req.body;
   const currentUserEmail = req.session.user.email;
   const dateID = req.query.id;
-  const newSurvey = await surveyDB.createSurvey(survey, dateID, currentUserEmail);
+  const newSurvey = await surveyDB.submitSurvey(survey, dateID, currentUserEmail);
   res.json(newSurvey);
 });
 
-// TODO: MAKE ROUTE GET CORRECT DATA
 router.get('/getDates', async (req, res) => {
   console.log("I'm in the /getDates route");
 
   // gets data from datesDB.js and sends it to clientDates.js
-  const dates = await datesDB.getDates(req.session.user);
+  const dates = await datesDB.getDates(req.session.user.email);
 
   res.json(dates);
 
@@ -125,28 +128,29 @@ router.get('/getDates', async (req, res) => {
 
 router.get('/getDate', async (req, res) => {
   console.log("I'm in the /getDate route");
-
   // gets data from datesDB.js and sends it to clientDate.js
-  const date = await datesDB.getDate(req.session.user);
+  console.log("query id: ", req.body);
+  const date = await datesDB.getDate(req.body);
 
   res.json(date);
 
 });
 
-router.get('/view-date', async (req, res) => {
+router.get('/getDate', async (req, res) => {
   console.log("I'm in the /view-date route");
 
-  res.sendFile(path.join(__dirname + '/public/view-date.html'));
+  // call getDate function from the db
+  const date = await datesDB.getDate(req.query.id);
+  res.json(date);
+
+  //res.sendFile(path.join(__dirname + '/public/view-date.html'));
 });
 
 router.post('/create-date', async (req, res) => {
   const currentUserEmail = req.session.user.email;
   const otherUserEmail = req.body.email;
-  const daterInfo = {
-    users: [{ currentUserEmail }, { otherUserEmail }]
-  }
   const date = req.body.date;
-  await datesDB.createDate(daterInfo, date);
+  await datesDB.createDate(currentUserEmail, otherUserEmail, date);
   res.redirect('past-dates.html')
 });
 
