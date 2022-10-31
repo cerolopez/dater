@@ -12,6 +12,24 @@ function MyMongoDB() {
   const DATE_COLLECTION = "dates";
   // ... any other collections? form questions, date_responses, 
   
+  // NEW CODE -- TESTING
+  myDB.getName = async (user) => {
+    let client;
+
+    try {
+      client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const usersCol = db.collection(USER_COLLECTION);
+      const cursor = await usersCol.find({ email: user.email }).toArray();
+      const res = cursor[0];
+      return res.name;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  }
+
   myDB.authenticate = async (user) => {
     let client; 
     
@@ -102,6 +120,33 @@ function MyMongoDB() {
       client.close();
     }
   };
+
+  myDB.updateAccount = async (oldEmail, newName, newEmail, newPassword) => {
+    let client;
+    // FINISH
+    try {
+      client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+      await client.connect();
+      console.log("connection successful");
+      const db = client.db(DB_NAME);
+      const usersCol = db.collection(USER_COLLECTION);
+      const cursor = await usersCol.find({email: newEmail}).toArray();
+      if (cursor.length <= 1) {
+         await usersCol.updateOne( {email: oldEmail}, {
+          $set: {
+            name: newName,
+            email: newEmail,
+            password: newPassword
+          }
+        });
+        return true;
+      } else return false;
+
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  }
 
 
   return myDB;
