@@ -4,7 +4,7 @@ function surveyDB() {
     const surveyDB = {};
     const url = process.env.URI || "mongodb://localhost:27017";
     const DB_NAME = "daterdb";
-    const USER_COLLECTION = "formResponses";
+    const SURVEY_COLLECTION = "formResponses";
 
     // datesDB.getDates = async (query = {}, page = 0) => {
     //     let client;
@@ -27,20 +27,22 @@ function surveyDB() {
     //     }
     // };
 
-    surveyDB.addToSurvey = async (currentDateID) => {
-
+    surveyDB.addToSurvey = async (survey, dateID, currentUserEmail) => {
+      
+      const res = await surveyCollection.insertOne(newSurvey);
     }
 
-    surveyDB.createSurvey = async (responses) => {
+    surveyDB.createSurvey = async (survey, dateID, currentUserEmail) => {
         let client;
         try {
           client = new MongoClient(url);
     
           const db = client.db(DB_NAME);
-          const surveyCollection = db.collection(USER_COLLECTION);
+          const surveyCollection = db.collection(SURVEY_COLLECTION);
 
           const newSurvey = {
-            respondants: [{ 'current user ID goes here': responses }],
+            date: { dateID },
+            respondants: { 0: [{ 0: currentUserEmail }, { 1: survey }] }
           }
           console.log('Attempting to create a new survey');
           
