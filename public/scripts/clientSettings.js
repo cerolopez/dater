@@ -59,7 +59,7 @@ function ClientSettings() {
                 const resUser = await res.json();
                 if (resUser.isUpdated) {
                     clientUtil.showMessage(divMsg, "Account was successfully updated.");
-                    setTimeout(() => clientUtil.redirect("settings"), 2000)
+                    setTimeout(() => clientUtil.redirect("settings"), 2000);
                 
                 } else {
                     clientUtil.showMessage(divMsg, resUser.err);
@@ -88,8 +88,22 @@ function ClientSettings() {
             divConfirm.style.display = "none";
         });
 
-        btnConfirmDelete.addEventListener("click", () => {
+        btnConfirmDelete.addEventListener("click", async () => {
             // will update now!!
+            try {
+                res = await fetch("/deleteAccount");
+                const resResult = await res.json();
+                if (resResult.isDeleted) {
+                    clientUtil.showMessage(divMsg, "Account was successfully deleted.");
+                    setTimeout(() => clientUtil.redirect("index"), 2000);
+
+                } else {
+                    clientUtil.showMessage(divMsg, resResult.err);
+                    setTimeout(() => clientUtil.redirect("settings"), 2000);
+                }
+            } catch (err) {
+                console.log(err);
+            }
         });
     }
 

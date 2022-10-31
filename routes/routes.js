@@ -36,7 +36,8 @@ router.post('/sign-up', async (req, res) => {
   console.log(result);
 
   if (result) {
-    req.session.user = {user: user};
+    req.session.user = user;
+    req.session.isLoggedIn = true;
     res.json({isCreated: true, isLoggedIn: true, err: null});
     console.log(req.session);
   } else {
@@ -87,10 +88,20 @@ router.post("/update-account", async (req, res) => {
     req.session.user = user;
     res.json({isUpdated: true, err: null});
   } else {
-    res.json({isUpdated: false, err: "Something went wrong."})
+    res.json({isUpdated: false, err: "Something went wrong."});
   }
 
 });
+
+router.get("/deleteAccount", async (req, res) => {
+  const result = await myDB.deleteAccount(req.session.user.email);
+  if (result) {
+    req.session.user = null;
+    res.json({isDeleted: true, err: null});
+  } else {
+    res.json({isDeleted: false, err: "Something went wrong."});
+  }
+})
 
 // router.get('/dashboard(.html)?', async (req, res) => {
 //   if (req.session.user) {

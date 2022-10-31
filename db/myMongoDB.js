@@ -148,6 +148,24 @@ function MyMongoDB() {
     }
   }
 
+  myDB.deleteAccount = async (email) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+      await client.connect();
+      console.log("connection successful");
+      const db = client.db(DB_NAME);
+      const usersCol = db.collection(USER_COLLECTION);
+      const result = await usersCol.deleteOne({email: email});
+      return (result.acknowledged ? true : false);
+      
+
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  }
+
 
   return myDB;
 }
