@@ -66,6 +66,8 @@ router.post('/authenticate(.html)?', async (req, res) => {
     // NEW ADDITION
     req.session.user = user;
     req.session.user.isLoggedIn = true;
+    // NEW CODE -- TESTING
+    req.session.user.name = await myDB.getName(user);
     //
     console.log(req.session);
     res.json({isLoggedIn: true, err: null});
@@ -73,6 +75,19 @@ router.post('/authenticate(.html)?', async (req, res) => {
     req.session.user = null;
     res.json({ isLoggedIn: false, err: "Wrong email or password." });
   }
+});
+
+router.post("/update-account", async (req, res) => {
+  const user = req.body;
+  // FINISH
+  const result = await myDB.updateAccount(req.session.user.email, user.name, user.email, user.password);
+  if (result) {
+    req.session.user = user;
+    res.json({isUpdated: true, err: null});
+  } else {
+    res.json({isUpdated: false, err: "Something went wrong."})
+  }
+
 });
 
 // router.get('/dashboard(.html)?', async (req, res) => {
@@ -84,6 +99,8 @@ router.post('/authenticate(.html)?', async (req, res) => {
 
 router.get('/getUser', (req, res) => {
   res.json({ user: req.session.user });
+  // TESTING
+  console.log("User: ", req.session.user);
 });
 
 router.post('/submit-survey', async (req, res) => {
