@@ -68,24 +68,24 @@
                                     <form id="survey-form" action="/submit-survey" method="post">
                                     <div class="mb-3">
                                         <label class="form-label" name="looking-for" id="looking-for" for="q1">What are you looking for?</label><br>
-                                        <input type="radio" name="serious" id="serious" />
+                                        <input type="radio" name="looking-for" id="serious" />
                                         <label for="looking-for">I'm looking for something serious.</label><br>
-                                        <input type="radio" name="open" id="open" />
+                                        <input type="radio" name="looking-for" id="open" />
                                         <label for="looking-for">I'm open to anything</label><br>
-                                        <input type="radio" name="not-serious" id="not-serious" />
+                                        <input type="radio" name="looking-for" id="not-serious" />
                                         <label for="looking-for">I don't want anything serious</label><br>
-                                        <input type="radio" name="do-not-know" id="do-not-know" />
+                                        <input type="radio" name="looking-for" id="do-not-know" />
                                         <label for="looking-for">I don't know</label><br>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" name="looking-for" id="looking-for" for="q2">What are you looking for?</label><br>
-                                        <input type="radio" name="serious" id="serious" />
+                                        <input type="radio" name="looking-for" id="serious" />
                                         <label for="looking-for">I'm looking for something serious.</label><br>
-                                        <input type="radio" name="open" id="open" />
+                                        <input type="radio" name="looking-for" id="open" />
                                         <label for="looking-for">I'm open to anything</label><br>
-                                        <input type="radio" name="not-serious" id="not-serious" />
+                                        <input type="radio" name="looking-for" id="not-serious" />
                                         <label for="looking-for">I don't want anything serious</label><br>
-                                        <input type="radio" name="do-not-know" id="do-not-know" />
+                                        <input type="radio" name="looking-for" id="do-not-know" />
                                         <label for="looking-for">I don't know</label><br>
                                     </div>
                                     <div class="d-flex justify-content-center">
@@ -134,7 +134,15 @@
       </footer>
 
 <script type="module">
-  import clientDate from "./scripts/clientDate.js";
+  import clientDates from "./scripts/clientDates.js";
+
+  // need to fetch data from /getData route
+  async function runPage() {
+        await clientDates.getCurrentUser();
+        await clientDates.getCurrentDate();
+        //await clientDates.setupLogout();
+      }
+  runPage();
 
 </script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
