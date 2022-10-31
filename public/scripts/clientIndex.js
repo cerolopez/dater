@@ -1,64 +1,27 @@
-/* begin example code
-function MyClientModule() {
-    const msgDiv = document.querySelector("div#messages");
-  
-    function checkForErrors() {
-      // From  https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-      const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-  
-      console.log("urlParams", params.msg);
-      if (params.msg) {
-        msgDiv.querySelector("#content").innerHTML = params.msg;
-        msgDiv.style.display = "block";
-      }
-    }
-  
-    async function checkIfLoggedIn() {
-      const res = await fetch("/getuser");
-      const user = await res.json();
-  
-      const spanIsAuth = document.querySelector("span#isAuth");
-  
-      if (user.user) {
-        spanIsAuth.innerHTML = " Authenticated!";
-      } else {
-        spanIsAuth.innerHTML = " 😭 ";
-      }
-  
-      return user.user !== undefined;
-    }
-  
-    checkForErrors();
-    checkIfLoggedIn();
-  }
-  
-  MyClientModule();
-// end example code
-  */
+// function ClientIndex() {
+//   const clientIndex = {};
 
+//   //const dateDiv = document.querySelector("div#newDateContent");
 
+//   // TODO: FIX RENDERING OF DATES
+//   function renderDate (date) {
+//     // do something
+//     console.log("I'm rendering the date");
+//     const currentDateID = date.at(0)._id;
+//     console.log("current date ID: ", currentDateID);
+//   }
 
-/*
-const button = document.getElementById('btnSignUp');
-button.addEventListener('click', function(e) {
-console.log('sign up button was clicked');
+//   async function fetchDate () {
+//       const res = await fetch('/');
+//       console.log("I'm in clientIndex.js");
+//       const date = await res.json();
+//       console.log("I'm after clientIndex.js");
 
-fetch('/sign-up', {method: 'POST'})
-    .then(function(response) {
-        if(response.ok) {
-            console.log('click was recorded');
-            console.log(response);
+//       renderDate(date);
+//     }
+  
+//   fetchDate();
+//   return clientIndex;
+// }
 
-            return;
-        }
-        console.log(response);
-        throw new Error('Request failed.');
-    })
-    .catch(function(error) {
-        console.log(error);
-    });
-});
-
-*/
+// export default ClientIndex();
