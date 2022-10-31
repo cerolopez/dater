@@ -135,10 +135,14 @@
     font-style: underline;
   }
 
-  #btnSignUp {
+  #btnSignUp, #btnSettings, #btnSave {
     background-color: #FFB698;
     color: black;
     border: white;
+  }
+
+  .confirmDelete {
+    display: none;
   }
 
   #inverse-color {
