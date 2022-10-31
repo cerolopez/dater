@@ -58,14 +58,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <!-- TODO: QUERY DATE'S NAME AND ADD HERE -->
-                            <h1 id="dash-header"><strong>You and [name]</strong></h1>
+                            <h1 id="dash-header"><strong>You and <div id="dateName"></div></strong></h1>
                         </div>
                     </div>
                     <div class="row dash-row">
                         <div class="col-md-6">
                             <div class="d-flex justify-content-center">
                                 <section id="survey">
-                                    <form id="survey-form" action="/create-survey" method="post">
+                                    <form id="survey-form" action="/submit-survey" method="post">
                                     <div class="mb-3">
                                         <label class="form-label" name="looking-for" id="looking-for" for="q1">What are you looking for?</label><br>
                                         <input type="radio" name="serious" id="serious" />
@@ -133,7 +133,10 @@
         </div>
       </footer>
 
-<script type="text/javascript" src="script.js"></script>
+<script type="module">
+  import clientDate from "./scripts/clientDate.js";
+
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
   crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
