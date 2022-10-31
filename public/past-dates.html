@@ -62,66 +62,8 @@
                     </div>
                     <!-- TODO: LEAVE BLANK BUT RENDER THIS HTML/CSS UPON LOAD -->
                     <div class="row dash-row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="div" id="newDateContent"></div>
-                            
-                            <!--
-                            <div class="d-flex justify-content-center">
-                                <div class="div" id="newDateContent"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="d-flex justify-content-center">
-                                <div class="card dash-card text-center">
-                                    <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href=""><div id="newDateContent"></div></a> &#9203;</h3>
-                                        <p id="inverse-color">[date goes here]</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="d-flex justify-content-center">
-                                <div class="card dash-card text-center">
-                                    <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href=""><div id="newDateContent"></div></a> &#9989;</h3>
-                                        <p id="inverse-color">[date goes here]</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row dash-row">
-                        <div class="col-md-4">
-                            <div class="d-flex justify-content-center">
-                                <div class="card dash-card text-center">
-                                    <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href=""><div id="newDateContent"></div></a> &#9989;</h3>
-                                        <p id="inverse-color">[date goes here]</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="d-flex justify-content-center">
-                                <div class="card dash-card text-center">
-                                    <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href=""><div id="newDateContent"></div></a> &#128172;</h3>
-                                        <p id="inverse-color">[date goes here]</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="d-flex justify-content-center">
-                                <div class="card dash-card text-center">
-                                    <div class="card-body">
-                                        <h3 id="inverse-color"><a id="inverse-hyperlink" href=""><div id="newDateContent"></div></a> &#9203;</h3>
-                                        <p id="inverse-color">[date goes here]</p>
-                                    </div>
-                                </div>
-                            </div>
-                            -->
                         </div>
                     </div>
                     <div class="row loadMoreRow">
@@ -157,6 +99,14 @@
 
       <script type="module">
         import clientDates from "./scripts/clientDates.js";
+
+        async function runPage() {
+        await clientIndex.getCurrentUser();
+        await clientDates.fetchDates();
+        //await clientIndex.setupLogout();
+      }
+
+      runIT();
         </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
   crossorigin="anonymous"></script>

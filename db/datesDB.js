@@ -15,7 +15,10 @@ function datesDB() {
             const datesCollection = client.db(DB_NAME).collection(DATE_COLLECTION);
             
             const myCursor = await datesCollection.find({
-                'daterInfo.0.email': query.email
+                $or: [
+                    { 'users.0': query },
+                    { 'users.1': query }
+                ]
             }
             ).toArray();
 
@@ -37,7 +40,7 @@ function datesDB() {
             
             const myCursor = await datesCollection.find(
                 {
-                    _id: query.id
+                    _id: query
                 }
             ).toArray();
 
@@ -49,7 +52,7 @@ function datesDB() {
 
     };
 
-    datesDB.createDate = async (daterInfo, date) => {
+    datesDB.createDate = async (currentUserEmail, otherUserEmail, date) => {
         let client;
         try {
           client = new MongoClient(url);
@@ -57,7 +60,7 @@ function datesDB() {
           const db = client.db(DB_NAME);
           const datesCollection = db.collection(DATE_COLLECTION);
           const newDate = {
-            daterInfo: daterInfo,
+            users: [currentUserEmail, otherUserEmail],
             date: date
           }
           console.log("Attempting to create a new date");
