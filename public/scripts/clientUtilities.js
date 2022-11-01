@@ -1,3 +1,4 @@
+// Made by Tim
 function ClientUtil() {
     const clientUtil = {};
 

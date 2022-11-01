@@ -1,3 +1,5 @@
+// Made by Tim
+
 import clientUtil from "./clientUtilities.js";
 
 function ClientSignUp() {
