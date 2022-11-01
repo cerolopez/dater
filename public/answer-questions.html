@@ -49,6 +49,11 @@
 
   <!-- Begin main content-->
   <main>
+    <!-- Alert box that displays message upon incorrect credentials -->
+    <div class="alert alert-warning alert-dismissible fade show" id="msg" role="alert">
+        <span id="msgContent"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     <!-- Section 1 -->
   <section class="trans-container d-flex justify-content-center">
     <div class="row">
@@ -65,12 +70,6 @@
                         <div class="col-md-12">
                             <div class="d-flex justify-content-center">
                                 <section id="survey">
-                                    <form id="survey-form" action="/answer-questions" method="post">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="name">Name:</label>
-                                            <input class="form-control" type="text" name="name" id="name" />
-                                        </div>
-                                    <!--
                                     <form id="survey-form" action="/postSurvey" method="post">
                                     <div class="mb-3">
                                         <label class="form-label" name="looking-for" id="looking-for" for="Q1">What are you looking for?</label><br>
@@ -94,7 +93,6 @@
                                         <input type="radio" name="second-q" id="do-not-know" />
                                         <label for="looking-for">I don't know</label><br>
                                     </div>
-                                    -->
                                     <div class="d-flex justify-content-center">
                                         <button class="btn btn-primary" id="btnSurvey" type="submit">Submit</button>
                                     </div>
@@ -120,7 +118,7 @@
         </div>
     </div>
     </section>
-  </main>
+</main>
 
   <!-- Begin footer -->
       <footer>
