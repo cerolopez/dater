@@ -7,12 +7,26 @@ function ClientDates() {
 
   // ---------------------- FRONTEND RENDER FUNCTIONS ---------------------------
   function renderDates (userDates) {
+
     const datesDiv = document.querySelector("div#newDateContent");
     datesDiv.innerHTML = '';
 
     for (let step = 0; step < userDates.length; step++) {
-      const currentDateID = userDates.at(step)._id;
-      const currentDate = userDates.at(step).date;
+      let clientIndex = null;
+      let dateIndex = null;
+      const clientName = currentUser.name;
+      const firstIndexName = userDates.at(step).users.at(0).name;
+  
+      if (clientName === firstIndexName) {
+        clientIndex = 0;
+        dateIndex = 1;
+      } else {
+        clientIndex = 1;
+        dateIndex = 0;
+      }
+      const currentDateName = userDates.at(step).users.at(dateIndex).name
+      const currentDateID = userDates.at(step)._id
+      const currentDateDate = userDates.at(step).date
       const dDiv = document.createElement("div");
       dDiv.innerHTML = `
 
@@ -20,7 +34,8 @@ function ClientDates() {
         <div class="card dash-card text-center">
           <div class="card-body">
           <h3><a href="/view-date.html?id=${currentDateID}" id="viewDate">
-          <p id="inverse-color">${currentDate}</p>
+          <p id="inverse-color">${currentDateName}</p>
+          <p id="inverse-color">${currentDateDate}</p>
           </a></h3>
           </div>
           </div>
@@ -55,7 +70,6 @@ function ClientDates() {
     const dateStatusDiv = document.querySelector('div#dateStatus');
     dateStatusDiv.innerHTML = '';
 
-    // TODO: FIGURE OUT HOW TO DISPLAY ON FRONTEND
     if (surveyQuestions[0]) {
       console.log("surveyQuestions: ", surveyQuestions);
       for (let step = 0; step < surveyQuestions.length; step++) {
