@@ -1,7 +1,8 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 function datesDB() {
     const datesDB = {};
+
     const url = process.env.URI || "mongodb://localhost:27017";
     const DB_NAME = "daterdb";
     const DATE_COLLECTION = "dates";
@@ -17,8 +18,8 @@ function datesDB() {
             
             const myCursor = await datesCollection.find({
                 $or: [
-                    { 'users.0': query },
-                    { 'users.1': query }
+                    { 'users.0.email': query },
+                    { 'users.1.email': query }
                 ]
             }
             ).toArray();
@@ -41,16 +42,17 @@ function datesDB() {
             
             const myCursor = await datesCollection.find(
                 {
-                    _id: query
+                    _id: ObjectId(`${query}`)
                 }
             ).toArray();
+
+            console.log("in the datesdb: xyz", myCursor.at(0));
 
             return myCursor;
         } finally {
             console.log("getDates: closing DB connection");
             client.close;
         }
-
     };
 
     datesDB.createDate = async (currentUserEmail, otherUserEmail, date) => {
@@ -59,6 +61,7 @@ function datesDB() {
         }
         
         let client;
+
         try {
           client = new MongoClient(url);
           await client.connect();
@@ -83,15 +86,23 @@ function datesDB() {
           
           const res = await datesCollection.insertOne(newDate);
           console.log("Inserted", res);
+
+          
           return true;
         } finally {
           console.log("Closing the connection");
           client.close();
         }
-        
-      };    
-
-      return datesDB;
     }
+
+    datesDB.editSurvey = async (responses, dateID, currentUserEmail) => {
+        console.log("I'm in the datesdb > editSurvey");
+        console.log("here's the dateID: ", dateID);
+
+    }
+
+    return datesDB;
+        
+    };
 
 export default datesDB();
