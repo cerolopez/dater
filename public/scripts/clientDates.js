@@ -62,14 +62,24 @@ function ClientDates() {
     renderDateStatus(dateName);
 
     // render client status here
-    let dateID = getCurrentDateID();
+    let clientSurvey = currentDate.at(0).users.at(0).formResponses;
+    //let surveyStr = JSON.stringify(clientSurvey);
+    console.log(clientSurvey);
 
+    const dStatDiv = document.createElement("div");
     const dateStatusDiv = document.querySelector('div#clientStatus');
     dateStatusDiv.innerHTML = '';
-    const dStatDiv = document.createElement("div");
-    dStatDiv.innerHTML = `
+
+    // TODO: FIGURE OUT HOW TO DISPLAY ON FRONTEND
+    if (clientSurvey) {
+      dStatDiv.innerHTML = `
+        ${clientSurvey.form-responses}
+    `;
+    } else {
+      dStatDiv.innerHTML = `
     <div class="btn btn-primary"><a href="/answer-questions.html" id="viewDate">Answer questions</a></div>
     `;
+    }
     dateStatusDiv.appendChild(dStatDiv);
   }
 
