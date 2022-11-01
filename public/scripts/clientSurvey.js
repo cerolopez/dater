@@ -16,13 +16,12 @@ function ClientSurvey() {
     
       console.log("Submitting survey...");
       const form = document.querySelector("form#survey-form");
-      //let res;
     
       form.addEventListener("submit", async (evt) => {
         evt.preventDefault();
         console.log("Attempting to post form responses");
-    
-        let res = await fetch('/postSurvey');
+
+        let res = await fetch('/answer-questions', { method: 'POST' });
         let resDate = await res.json();
         // try {
         //   res = await fetch(`/postSurvey?id=${dateID}`);
