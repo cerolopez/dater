@@ -31,7 +31,7 @@ function ClientDates() {
     }
   }
 
-  function renderDateStatus(dateName, currentDate) {
+  function renderDateStatus(dateName, currentDate, dateIndex) {
     // add date's name to header
     const dateNameDiv = document.querySelector('div#dateName');
     dateNameDiv.innerHTML = '';
@@ -42,13 +42,49 @@ function ClientDates() {
     dateNameDiv.appendChild(dateDiv);
 
     // add date's status
+    const clientSurvey = currentDate.at(0).users.at(dateIndex).formResponses;
+
+    const surveyQuestions = [];
+    const surveyAnswers = [];
+
+    for (const [key, value] of Object.entries(clientSurvey)) {
+      surveyQuestions.push(`${key}`);
+      surveyAnswers.push(`${value}`);
+    }
+
     const dateStatusDiv = document.querySelector('div#dateStatus');
     dateStatusDiv.innerHTML = '';
-    const dStatDiv = document.createElement("div");
-    dStatDiv.innerHTML = `
+
+    // TODO: FIGURE OUT HOW TO DISPLAY ON FRONTEND
+    if (surveyQuestions[0]) {
+      console.log("surveyQuestions: ", surveyQuestions);
+      for (let step = 0; step < surveyQuestions.length; step++) {
+        const currentQuestion = surveyQuestions[step];
+        const currentResponse = surveyAnswers[step];
+        const dStatDiv = document.createElement("div");
+        dStatDiv.innerHTML = `
+  
+          <div class="d-flex justify-content-center">
+          <div class="card dash-card text-center">
+            <div class="card-body">
+            <h3 id="inverse-color"><strong>${currentQuestion}</strong></h3>
+            <p id="inverse-color">${currentResponse}</p>
+            </a>
+            </div>
+            </div>
+            </div>
+        `;
+  
+        dateStatusDiv.appendChild(dStatDiv);
+      }
+    } else {
+      console.log("I'm in the else statement");
+      const dStatDiv = document.createElement("div");
+      dStatDiv.innerHTML = `
     <p>${dateName} hasn't answered their questions yet.</p>
     `;
-    dateStatusDiv.appendChild(dStatDiv);
+      dateStatusDiv.appendChild(dStatDiv);
+    }
   }
 
   function renderDate (currentDate) {
