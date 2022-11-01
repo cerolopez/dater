@@ -172,22 +172,12 @@ router.post('/create-date', async (req, res) => {
   const otherUserEmail = req.body.email;
   const date = req.body.date;
 
-  const newSurveyObj = {
-    Q1: null,
-    Q2: null,
-    Q3: null,
-    Q4: null,
-    Q5: null,
-    Q6: null,
-    Q7: null,
-    Q8: null
-  };
+  const newSurveyObj = {};
 
   const currentUser = { name: currentUserName, email: currentUserEmail, formResponses: newSurveyObj };
   const otherUser = { name: otherUserName, email: otherUserEmail, formResponses: newSurveyObj };
-  await datesDB.createDate(currentUser, otherUser, date);
 
-  const createResult = await datesDB.createDate(currentUserEmail, otherUserEmail, date);
+  const createResult = await datesDB.createDate(currentUser, currentUserEmail, otherUser, otherUserEmail, date);
   if (createResult) {
     res.json({datePosted: true, err: null})
   } else {
