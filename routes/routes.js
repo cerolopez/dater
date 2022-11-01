@@ -113,54 +113,64 @@ router.get("/deleteAccount", async (req, res) => {
 router.get('/getUser', (req, res) => {
 
   // can we query the DB and add the user's name?
-  res.json({ user: req.session.user });
+  res.json({
+    isLoggedIn: !!req.session.user,
+    user: req.session.user
+  });
   // TESTING
   console.log("User: ", req.session.user);
 });
 
-router.post('/submit-survey', async (req, res) => {
-  console.log('About to submit a survey response');
-  const survey = req.body;
+router.post('/postSurvey', (req, res) => {
+  console.log(`I'm in the /postSurvey route`);
+  const responses = req.body;
   const currentUserEmail = req.session.user.email;
-  const dateID = req.query.id;
-  const newSurvey = await surveyDB.submitSurvey(survey, dateID, currentUserEmail);
-  res.json(newSurvey);
+  console.log("date ID: ", req.query.id);
+
+  //const newSurvey = await datesDB.editSurvey(responses, currentUserEmail);
+  //const newSurvey = await datesDB.submitSurvey(responses, currentUserEmail);
+
+  if (newSurvey) {
+    res.json({ isCreated: true, err: null });
+  } else {
+    res.json({ isCreated: false });
+  }
 });
 
 router.get('/getDates', async (req, res) => {
   console.log("I'm in the /getDates route");
+  if (!req.session.user) {
+    console.log("user is logged out");
+    return;
+  }
+
+  const query = req.session.user.email;
+  const dates = await datesDB.getDates(query);
 
   // gets data from datesDB.js and sends it to clientDates.js
-  const dates = await datesDB.getDates(req.session.user.email);
-
-  res.json(dates);
+  return res.json(dates);
 
 });
 
 router.get('/getDate', async (req, res) => {
-  console.log("I'm in the /getDate route");
-  // gets data from datesDB.js and sends it to clientDate.js
-  console.log("query id: ", req.body);
-  const date = await datesDB.getDate(req.body);
-
-  res.json(date);
-
-});
-
-router.get('/getDate', async (req, res) => {
-  console.log("I'm in the /view-date route");
-
+  console.log("I'm in the /getDate route. ID: ", req.query.id);
   // call getDate function from the db
-  const date = await datesDB.getDate(req.query.id);
-  res.json(date);
 
-  //res.sendFile(path.join(__dirname + '/public/view-date.html'));
+  const query = req.query.id;
+  req.session.user.currectDateID = req.query.id;
+  const currentDate = await datesDB.getDate(query);
+  return res.json(currentDate);
 });
 
 router.post('/create-date', async (req, res) => {
+  const currentUserName = req.session.user.name;
+  console.log('user name: ', currentUserName);
   const currentUserEmail = req.session.user.email;
+
+  const otherUserName = req.body.name;
   const otherUserEmail = req.body.email;
   const date = req.body.date;
+<<<<<<< Updated upstream
   const createResult = await datesDB.createDate(currentUserEmail, otherUserEmail, date);
   if (createResult) {
     res.json({datePosted: true, err: null})
@@ -168,6 +178,24 @@ router.post('/create-date', async (req, res) => {
     res.json({datePosted: false, err: "Please enter another registered user."})
   }
   
+=======
+
+  const newSurveyObj = {
+    Q1: null,
+    Q2: null,
+    Q3: null,
+    Q4: null,
+    Q5: null,
+    Q6: null,
+    Q7: null,
+    Q8: null
+  };
+
+  const currentUser = { name: currentUserName, email: currentUserEmail, formResponses: newSurveyObj };
+  const otherUser = { name: otherUserName, email: otherUserEmail, formResponses: newSurveyObj };
+  await datesDB.createDate(currentUser, otherUser, date);
+  res.redirect('past-dates.html');
+>>>>>>> Stashed changes
 });
 
 /*
