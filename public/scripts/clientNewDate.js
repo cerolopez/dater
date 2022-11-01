@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import clientUtil from "./clientUtilities.js";
 
 function ClientNewDate () {
@@ -68,6 +69,44 @@ function ClientNewDate () {
     //         }
     //     });
     //   }
+=======
+function ClientNewDate () {
+    const clientNewDate = {};
+
+    const form = document.querySelector("form#new-date-form");
+    
+    form.addEventListener("submit", async (evt) => {
+        evt.preventDefault();
+        console.log("Fetching new date ID");
+        res = await fetch("/new-date");
+        const newDate = await res.json();
+    });
+
+      async function grabNewDateID () => {
+        console.log("Creating a date...");
+        const form = document.querySelector("form#new-date-form");
+        let res;
+        form.addEventListener("submit", async (evt) => {
+            evt.preventDefault();
+            console.log("Attempting to create new date");
+            try {
+                res = await fetch("/new-date", {
+                    method: "POST",
+                    body: new URLSearchParams(new FormData(form))
+                });
+                const resUser = await res.json();
+                if (resUser.isCreated) {
+                    clientUtil.redirect("dashboard");
+                } else {
+                    clientUtil.showMessage(divMsg, resUser.err);
+                    setTimeout(() => clientUtil.redirect("signup"), 2000);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        });
+      }
+>>>>>>> Stashed changes
 
     return clientNewDate;
 }
