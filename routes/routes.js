@@ -170,15 +170,6 @@ router.post('/create-date', async (req, res) => {
   const otherUserName = req.body.name;
   const otherUserEmail = req.body.email;
   const date = req.body.date;
-<<<<<<< Updated upstream
-  const createResult = await datesDB.createDate(currentUserEmail, otherUserEmail, date);
-  if (createResult) {
-    res.json({datePosted: true, err: null})
-  } else {
-    res.json({datePosted: false, err: "Please enter another registered user."})
-  }
-  
-=======
 
   const newSurveyObj = {
     Q1: null,
@@ -194,8 +185,14 @@ router.post('/create-date', async (req, res) => {
   const currentUser = { name: currentUserName, email: currentUserEmail, formResponses: newSurveyObj };
   const otherUser = { name: otherUserName, email: otherUserEmail, formResponses: newSurveyObj };
   await datesDB.createDate(currentUser, otherUser, date);
-  res.redirect('past-dates.html');
->>>>>>> Stashed changes
+
+  const createResult = await datesDB.createDate(currentUserEmail, otherUserEmail, date);
+  if (createResult) {
+    res.json({datePosted: true, err: null})
+  } else {
+    res.json({datePosted: false, err: "Please enter another registered user."})
+  }
+
 });
 
 /*
