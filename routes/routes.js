@@ -161,8 +161,13 @@ router.post('/create-date', async (req, res) => {
   const currentUserEmail = req.session.user.email;
   const otherUserEmail = req.body.email;
   const date = req.body.date;
-  await datesDB.createDate(currentUserEmail, otherUserEmail, date);
-  res.redirect('past-dates.html')
+  const createResult = await datesDB.createDate(currentUserEmail, otherUserEmail, date);
+  if (createResult) {
+    res.json({datePosted: true, err: null})
+  } else {
+    res.json({datePosted: false, err: "Please enter another registered user."})
+  }
+  
 });
 
 /*
