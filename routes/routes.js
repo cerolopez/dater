@@ -121,13 +121,12 @@ router.get('/getUser', (req, res) => {
   console.log("User: ", req.session.user);
 });
 
-router.post('/answer-questions', (req, res) => {
+router.post('/answer-questions', async (req, res) => {
   console.log(`I'm in the /postSurvey route`);
   const responses = req.body;
   const currentUserEmail = req.session.user.email;
   console.log("date ID: ", req.session.user.currectDateID);
 
-  const newSurvey = await datesDB.editSurvey(responses, currentUserEmail);
   const newSurvey = await datesDB.submitSurvey(responses, currentUserEmail);
 
   // if (newSurvey) {
