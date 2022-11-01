@@ -86,8 +86,6 @@ function datesDB() {
           
           const res = await datesCollection.insertOne(newDate);
           console.log("Inserted", res);
-
-          
           return true;
         } finally {
           console.log("Closing the connection");
@@ -105,38 +103,25 @@ function datesDB() {
           client = new MongoClient(url);
           await client.connect();
           const db = client.db(DB_NAME);
-          const usersCollection = db.collection(USER_COLLECTION);
-          // CL WORKING ON THIS
-          const cursor = await usersCollection.find({
-            _id: ObjectId()
-        }).toArray();
-          console.log(cursor.length);
+          const dateCollection = db.collection(DATE_COLLECTION);
 
-          if (cursor.length < 1) {
-            return false;
-          }
-          const resEmail = await cursor[0].email;
-          if (resEmail !== otherUserEmail) {
-            return false;
-          }
+          const updateSurvey = await dateCollection.updateOne(
+            {
+                _id: ObjectId(`${dateID}`)
+            }, {
+             $set: { 'users.0.formResponses': responses }
+            }).toArray();
+          console.log("Updated", updateSurvey);
 
-          const datesCollection = db.collection(DATE_COLLECTION);
-          const newDate = {
-            users: [currentUserEmail, otherUserEmail],
-            date: date
-          }
-          console.log("Attempting to create a new date");
-          
-          const res = await datesCollection.insertOne(newDate);
-          console.log("Inserted", res);
+          const res = await dateCollection.find({
+            _id: ObjectId(`${dateID}`)
+          }).toArray();
 
-          
-          return true;
+          return res;
         } finally {
           console.log("Closing the connection");
           client.close();
         }
-
     }
 
     return datesDB;
