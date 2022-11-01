@@ -95,9 +95,47 @@ function datesDB() {
         }
     }
 
-    datesDB.editSurvey = async (responses, dateID, currentUserEmail) => {
+    datesDB.submitSurvey = async (responses, currentUserEmail, dateID) => {
         console.log("I'm in the datesdb > editSurvey");
-        console.log("here's the dateID: ", dateID);
+        console.log("here's the responses: ", responses);
+        
+        let client;
+
+        try {
+          client = new MongoClient(url);
+          await client.connect();
+          const db = client.db(DB_NAME);
+          const usersCollection = db.collection(USER_COLLECTION);
+          // CL WORKING ON THIS
+          const cursor = await usersCollection.find({
+            _id: ObjectId()
+        }).toArray();
+          console.log(cursor.length);
+
+          if (cursor.length < 1) {
+            return false;
+          }
+          const resEmail = await cursor[0].email;
+          if (resEmail !== otherUserEmail) {
+            return false;
+          }
+
+          const datesCollection = db.collection(DATE_COLLECTION);
+          const newDate = {
+            users: [currentUserEmail, otherUserEmail],
+            date: date
+          }
+          console.log("Attempting to create a new date");
+          
+          const res = await datesCollection.insertOne(newDate);
+          console.log("Inserted", res);
+
+          
+          return true;
+        } finally {
+          console.log("Closing the connection");
+          client.close();
+        }
 
     }
 
