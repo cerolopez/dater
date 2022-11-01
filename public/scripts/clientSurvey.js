@@ -1,41 +1,36 @@
-function ClientSurvey() {
+import clientUtil from "./clientUtilities.js";
+
+function ClientSurvey () {
     const clientSurvey = {};
+    const divMsg = document.querySelector("div#msg");
 
-    function getCurrentDateID () {
-        const queryString = window.location.search;
-        console.log(queryString);
-        const urlParams = new URLSearchParams(queryString);
-        const currentDateID = urlParams.get('id');
-        console.log("current date ID: ", currentDateID);
+    clientSurvey.setupSurvey = async () => {
+        console.log("I'm in setupSurvey");
+        const form = document.querySelector("form#survey-form");
+        let res;
+        form.addEventListener("submit", async (evt) => {
+            evt.preventDefault();
+            try {
+                res = await fetch("/postSurvey", {
+                    method: "POST",
+                    body: new URLSearchParams(new FormData(form))
+                });
+                const survInfo = await res.json();
+                if (survInfo) {
+                    clientUtil.redirect("dashboard");
+                
+                } else {
+                    clientUtil.showMessage(divMsg, survInfo.err);
+                    setTimeout(() => clientUtil.redirect("dashboard"), 2000);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        })
 
-        return currentDateID;
     }
 
-    clientSurvey.setupSurvey = () => {
-    const dateID = getCurrentDateID();
-    
-      console.log("Submitting survey...");
-      const form = document.querySelector("form#survey-form");
-    
-      let res;
-      form.addEventListener("submit", async (evt) => {
-        evt.preventDefault();
-        console.log("Attempting to post form responses");
-
-        try {
-          res = await fetch(`/postSurvey?id=${dateID}`);
-          const resSurvey = await res.json();
-          if (resSurvey.isCreated) {
-            window.location.replace('/answer-questions', { method: 'POST' });
-          } else {
-            showMessage("An error occurred. Redirecting you to dashboard.");
-            setTimeout(() => clientUtil.redirect("dashboard"), 2000);
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      });
-    }
+    clientSurvey.getCurrentUser = clientUtil.getCurrentUser;
 
     return clientSurvey;
 }
