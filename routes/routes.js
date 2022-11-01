@@ -121,13 +121,15 @@ router.get('/getUser', (req, res) => {
   console.log("User: ", req.session.user);
 });
 
-router.post('/answer-questions', async (req, res) => {
+router.post('/postSurvey', async (req, res) => {
   console.log(`I'm in the /postSurvey route`);
   const responses = req.body;
   const currentUserEmail = req.session.user.email;
-  console.log("date ID: ", req.session.user.currectDateID);
+  const dateID = req.session.user.currentDateID;
+  console.log("date ID: ", req.session.user.currentDateID);
 
-  const newSurvey = await datesDB.submitSurvey(responses, currentUserEmail);
+  const newSurvey = await datesDB.submitSurvey(responses, currentUserEmail, dateID);
+  res.json(newSurvey)
 
   // if (newSurvey) {
   //   res.json({ isCreated: true, err: null });
@@ -156,7 +158,7 @@ router.get('/getDate', async (req, res) => {
   // call getDate function from the db
 
   const query = req.query.id;
-  req.session.user.currectDateID = req.query.id;
+  req.session.user.currentDateID = req.query.id;
   const currentDate = await datesDB.getDate(query);
   return res.json(currentDate);
 });
