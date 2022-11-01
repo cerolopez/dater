@@ -31,7 +31,7 @@ function ClientDates() {
     }
   }
 
-  function renderDateStatus(dateName) {
+  function renderDateStatus(dateName, currentDate) {
     // add date's name to header
     const dateNameDiv = document.querySelector('div#dateName');
     dateNameDiv.innerHTML = '';
@@ -52,35 +52,68 @@ function ClientDates() {
   }
 
   function renderDate (currentDate) {
+    let clientIndex = null;
+    let dateIndex = null;
     const clientName = currentUser.name;
-    let dateName = currentDate.at(0).users.at(0).name;
+    const firstIndexName = currentDate.at(0).users.at(0).name;
 
-    if (dateName === clientName) {
-      dateName = currentDate.at(0).users.at(1).name;
+    if (clientName === firstIndexName) {
+      clientIndex = 0;
+      dateIndex = 1;
+    } else {
+      clientIndex = 1;
+      dateIndex = 0;
     }
 
-    renderDateStatus(dateName);
+    const dateName = currentDate.at(0).users.at(dateIndex).name;
+
+    renderDateStatus(dateName, currentDate, dateIndex);
 
     // render client status here
-    let clientSurvey = currentDate.at(0).users.at(0).formResponses;
-    //let surveyStr = JSON.stringify(clientSurvey);
-    console.log(clientSurvey);
+    const clientSurvey = currentDate.at(0).users.at(clientIndex).formResponses;
 
-    const dStatDiv = document.createElement("div");
+    const surveyQuestions = [];
+    const surveyAnswers = [];
+
+    for (const [key, value] of Object.entries(clientSurvey)) {
+      surveyQuestions.push(`${key}`);
+      surveyAnswers.push(`${value}`);
+    }
+
     const dateStatusDiv = document.querySelector('div#clientStatus');
     dateStatusDiv.innerHTML = '';
 
     // TODO: FIGURE OUT HOW TO DISPLAY ON FRONTEND
-    if (clientSurvey) {
-      dStatDiv.innerHTML = `
-        ${clientSurvey.form-responses}
-    `;
+    if (surveyQuestions[0]) {
+      console.log("I'm in the if statement");
+      console.log("surveyQuestions: ", surveyQuestions);
+      for (let step = 0; step < surveyQuestions.length; step++) {
+        const currentQuestion = surveyQuestions[step];
+        const currentResponse = surveyAnswers[step];
+        const dStatDiv = document.createElement("div");
+        dStatDiv.innerHTML = `
+  
+          <div class="d-flex justify-content-center">
+          <div class="card dash-card text-center">
+            <div class="card-body">
+            <h3 id="inverse-color"><strong>${currentQuestion}</strong></h3>
+            <p id="inverse-color">${currentResponse}</p>
+            </a>
+            </div>
+            </div>
+            </div>
+        `;
+  
+        dateStatusDiv.appendChild(dStatDiv);
+      }
     } else {
+      console.log("I'm in the else statement");
+      const dStatDiv = document.createElement("div");
       dStatDiv.innerHTML = `
-    <div class="btn btn-primary"><a href="/answer-questions.html" id="viewDate">Answer questions</a></div>
-    `;
+      <div class="btn btn-primary"><a href="/answer-questions.html" id="viewDate">Answer questions</a></div>
+      `;
+      dateStatusDiv.appendChild(dStatDiv);
     }
-    dateStatusDiv.appendChild(dStatDiv);
   }
 
   function showMessage(msg) {

@@ -55,7 +55,7 @@ function datesDB() {
         }
     };
 
-    datesDB.createDate = async (currentUserEmail, otherUserEmail, date) => {
+    datesDB.createDate = async (currentUser, currentUserEmail, otherUser, otherUserEmail, date) => {
         if (currentUserEmail === otherUserEmail) {
             return false;
         }
@@ -79,7 +79,7 @@ function datesDB() {
 
           const datesCollection = db.collection(DATE_COLLECTION);
           const newDate = {
-            users: [currentUserEmail, otherUserEmail],
+            users: [currentUser, otherUser],
             date: date
           }
           console.log("Attempting to create a new date");
@@ -105,13 +105,30 @@ function datesDB() {
           const db = client.db(DB_NAME);
           const dateCollection = db.collection(DATE_COLLECTION);
 
-          const updateSurvey = await dateCollection.updateOne(
-            {
-                _id: ObjectId(`${dateID}`)
-            }, {
-             $set: { 'users.0.formResponses': responses }
-            }).toArray();
-          console.log("Updated", updateSurvey);
+          const findCorrectIndex = await dateCollection.find({
+            _id: ObjectId(`${dateID}`)
+          }).toArray();
+
+          console.log("object: ", findCorrectIndex)
+          console.log("email i'm checking: ", findCorrectIndex.at(0).users.at(0).email)
+
+          if (findCorrectIndex.at(0).users.at(0).email === currentUserEmail) {
+            const updateSurvey = await dateCollection.updateOne(
+                {
+                    _id: ObjectId(`${dateID}`)
+                }, {
+                 $set: { "users.0.formResponses": responses }
+                });
+              console.log("Updated", updateSurvey);            
+          } else {
+            const updateSurvey = await dateCollection.updateOne(
+                {
+                    _id: ObjectId(`${dateID}`)
+                }, {
+                 $set: { "users.1.formResponses": responses }
+                });
+              console.log("Updated", updateSurvey);          
+            }
 
           const res = await dateCollection.find({
             _id: ObjectId(`${dateID}`)
