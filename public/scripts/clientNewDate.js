@@ -6,7 +6,6 @@ function ClientNewDate () {
 
     clientNewDate.setupCreateDate = async () => {
         console.log("I'm in setupCreateDate");
-        debugger;
         const form = document.querySelector("form#new-date-form");
         let res;
         form.addEventListener("submit", async (evt) => {
