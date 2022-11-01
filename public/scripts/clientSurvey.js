@@ -1,33 +1,45 @@
-/*
 function ClientSurvey() {
-    const userSideContent = document.querySelector('span#currentUserSide');
-    const dateSideContent = document.querySelector('span#dateSide');
+    const clientSurvey = {};
 
-    let currentUser = null;
+    function getCurrentDateID () {
+        const queryString = window.location.search;
+        console.log(queryString);
+        const urlParams = new URLSearchParams(queryString);
+        const currentDateID = urlParams.get('id');
+        console.log("current date ID: ", currentDateID);
 
-    // this makes the response show up in view-date.html
-    function renderSurvey(responses) {
-        userSideContent.style.display = 'none';
-        userSideContent.innerHTML = `Testing`;
-        dateSideContent.style.display = 'none';
-        dateSideContent.innerHTML = `Testing`;
-
+        return currentDateID;
     }
 
-    async function getSurvey(dateID) {
-        const divContent = document.querySelector('#newDateContent');
-        divContent.innerHTML = ``;
-
-        try {
-            res = await fetch('./getSurveyResponses');
-            const responses = await res.json();
-            renderSurvey(responses);
-        } catch (err) {
-            console.log(err);
-        }
+    clientSurvey.setupSurvey = () => {
+    const dateID = getCurrentDateID();
+    
+      console.log("Submitting survey...");
+      const form = document.querySelector("form#survey-form");
+      //let res;
+    
+      form.addEventListener("submit", async (evt) => {
+        evt.preventDefault();
+        console.log("Attempting to post form responses");
+    
+        let res = await fetch('/postSurvey');
+        let resDate = await res.json();
+        // try {
+        //   res = await fetch(`/postSurvey?id=${dateID}`);
+        //   const resSurvey = await res.json();
+          // if (resSurvey.isCreated) {
+          //   window.location.replace(`view-date.html/?id=${dateID}`);
+          // } else {
+          //   showMessage("An error occurred. Redirecting you to dashboard.");
+          //   setTimeout(() => clientUtil.redirect("dashboard"), 2000);
+          // }
+        // } catch (err) {
+        //   console.log(err);
+        // }
+      });
     }
 
+    return clientSurvey;
 }
 
 export default ClientSurvey();
-*/
