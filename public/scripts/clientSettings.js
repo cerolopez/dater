@@ -40,14 +40,6 @@ function ClientSettings() {
     clientSettings.updateAccountSetup = () => {
         const form = document.querySelector("form#settings-form");
         let res;
-        // btnSave.addEventListener("click", () => {
-        //     txtName.disabled = true;
-        //     txtEmail.disabled = true;
-        //     txtPassword.disabled = true;
-        //     btnSave.disabled = true;
-        //     btnSave.disabled = true;
-        //     btnEdit.disabled = false;
-        // })
 
         form.addEventListener("submit", async (evt) => {
             evt.preventDefault();
@@ -89,7 +81,6 @@ function ClientSettings() {
         });
 
         btnConfirmDelete.addEventListener("click", async () => {
-            // will update now!!
             try {
                 res = await fetch("/deleteAccount");
                 const resResult = await res.json();

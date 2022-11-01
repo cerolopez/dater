@@ -17,7 +17,6 @@ function ClientUtil() {
             console.log("Before fetch");
             res = await fetch("/getUser");
             const resUser = await res.json();
-            // NEW ADDITION
             console.log("ResUser: "+ resUser);
             //
             if (resUser.user.isLoggedIn) {
@@ -26,7 +25,6 @@ function ClientUtil() {
             } else {
                 currentUser = null;
             }
-            // new addition
             console.log(currentUser);
         } catch (err) {
             console.log(err);

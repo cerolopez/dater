@@ -6,15 +6,6 @@ function ClientLogin() {
 
     let currentUser = null;
 
-    // function showMessage(msg) {
-    //     divMsg.querySelector("#msgContent").innerHTML = msg;
-    //     divMsg.style.display = "block";
-    // }
-    
-    // function redirect(page) {
-    //     window.location.replace(page + ".html");
-    // }
-
     clientLogin.getCurrentUser = async () => {
         let res;
         try {
@@ -22,7 +13,6 @@ function ClientLogin() {
             const resUser = await res.json();
             if (resUser.isLoggedIn) {
                 currentUser = resUser.user;
-                // getPosts();
             } else {
                 currentUser = null;
                 clientUtil.redirect("login");

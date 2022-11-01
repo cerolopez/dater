@@ -21,7 +21,6 @@ import bodyParser from "body-parser";
 
 // begin example code
 
-// const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.post('/sign-up', async (req, res) => {
   const user = req.body;
@@ -29,7 +28,6 @@ router.post('/sign-up', async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  //const isUnique = await myDB.uniqueEmail(email);
 
   let result = await myDB.createUser(name, email, password);
   
@@ -45,25 +43,11 @@ router.post('/sign-up', async (req, res) => {
     res.json({ isCreated: false, isLoggedIn: false, err: "An account is already registered with given email. Try again." });
   }
 
-  // db.collection('users').insertOne({
-  //   name: name,
-  //   email: email,
-  //   password: password
-  //  }, (err, result) => {
-  //   if (err) {
-  //     return console.log(err);
-  //   }
-
-  //   console.log('insert was successful - user added from app.js');
-  //   console.log(res);
-  //   res.sendStatus(201);
-  // });
+  
 });
 
 router.post('/authenticate(.html)?', async (req, res) => {
   const user = req.body;
-
-  // TODO check that we got the correct info
   
   if (await myDB.authenticate(user)) {
     // NEW ADDITION
@@ -103,21 +87,13 @@ router.get("/deleteAccount", async (req, res) => {
   }
 })
 
-// router.get('/dashboard(.html)?', async (req, res) => {
-//   if (req.session.user) {
-
-//   }
-// });
-
 
 router.get('/getUser', (req, res) => {
 
-  // can we query the DB and add the user's name?
   res.json({
     isLoggedIn: !!req.session.user,
     user: req.session.user
   });
-  // TESTING
   console.log("User: ", req.session.user);
 });
 
@@ -131,11 +107,6 @@ router.post('/postSurvey', async (req, res) => {
   const newSurvey = await datesDB.submitSurvey(responses, currentUserEmail, dateID);
   res.json(newSurvey)
 
-  // if (newSurvey) {
-  //   res.json({ isCreated: true, err: null });
-  // } else {
-  //   res.json({ isCreated: false });
-  // }
 });
 
 router.get('/getDates', async (req, res) => {
@@ -195,28 +166,19 @@ router.post('/create-date', async (req, res) => {
   }
 
 });
+// TEST
+router.get('/sign-out', (req, res) => {
 
-/*
-router.post('/sign-up', (req, res) => {
-
-  const name = req.body.name;
-  const email = req.body.email;
-  const password = req.body.password;
-
-  myDB.collection('users').insertOne({
-    name: name,
-    email: email,
-    password: password
-   }, (err, result) => {
+  req.session.destroy((err) => {
     if (err) {
-      return console.log(err);
+      res.json({isSuccessful: false, errMsg: "Unable to sign out"});
+    } else {
+      res.json({isSuccessful: true, errMsg: null});
     }
-
-    console.log('insert was successful - user added');
-    res.sendStatus(201);
   });
+
 });
-*/
+
 
 
 export default router;
