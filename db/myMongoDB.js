@@ -1,18 +1,13 @@
-// begin example code
-
 import { MongoClient } from "mongodb";
 
+// Module
 function MyMongoDB() {
   const myDB = {};
   const url = process.env.URI || "mongodb://localhost:27017";
   const DB_NAME = "daterdb";
   const USER_COLLECTION = "users";
   
-  // Need to utilize the following collections 
-  const DATE_COLLECTION = "dates";
-  // ... any other collections? form questions, date_responses, 
-  
-  // NEW CODE -- TESTING
+  // Getting the name of the user when logging in --  will add name to session in routes.js
   myDB.getName = async (user) => {
     let client;
 
@@ -30,6 +25,7 @@ function MyMongoDB() {
     }
   }
 
+  // Authenticating users when logging in
   myDB.authenticate = async (user) => {
     let client; 
     
@@ -54,24 +50,26 @@ function MyMongoDB() {
 
   };
   
-  async function _isUniqueEmail(client, email) {
-    //let client;
-    try {
-      //client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
-      //await client.connect();
-      const db = client.db(DB_NAME);
-      const usersCol = db.collection(USER_COLLECTION);
-      const cursor = usersCol.find({email: email}).toArray();
-      const res = cursor[0];
-      // If res is undefined, return true. Else return false
-      return (res ? false : true); 
+  // Currently not used... will delete
+  // async function _isUniqueEmail(client, email) {
+  //   //let client;
+  //   try {
+  //     //client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+  //     //await client.connect();
+  //     const db = client.db(DB_NAME);
+  //     const usersCol = db.collection(USER_COLLECTION);
+  //     const cursor = usersCol.find({email: email}).toArray();
+  //     const res = cursor[0];
+  //     // If res is undefined, return true. Else return false
+  //     return (res ? false : true); 
       
-    } finally {
-      console.log("Closing the connection");
-      client.close();
-    }
-  };
+  //   } finally {
+  //     console.log("Closing the connection");
+  //     client.close();
+  //   }
+  // };
 
+  // Creating a user in the database -- will return 
   myDB.createUser = async (userName, email, password) => {
     let client;
     try {
@@ -88,9 +86,6 @@ function MyMongoDB() {
       if (cursor.length >= 1) {
         return false;
       }
-
-      
-      console.log("Attempting to create a new user");
       
       const res = await usersCol.insertOne(user);
       console.log("Inserted", res);
@@ -103,6 +98,7 @@ function MyMongoDB() {
     }
   }
 
+  // checking to see if the user entered a unique email
   myDB.uniqueEmail = async (email) => {
     let client;
     try {
