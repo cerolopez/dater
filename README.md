@@ -8,7 +8,7 @@ Cecilia Lopez and Tim Crawley
 ![Screenshot of homepage](public/images/homepage-screenshot.png)
 
 ## Project Objective
-This project was to create a web application that was to display our knowledge of Node, Express, MongoDB, and HTML. It also required us to perform CRUD operations on at least 2 Mong collections.
+This project was to create a web application that was to display our knowledge of Node, Express, MongoDB, and HTML. It also required us to perform CRUD operations on at least 2 Mongo collections and to implement at least 1 form.
 
 For our project, we elected to create Dater, an app for after the first date. End users can log dates with other users and answer questions to discover compatibility. Users can sign up to create an account, edit their account information, and delete their account. 
 
