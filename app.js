@@ -9,6 +9,7 @@ import session from 'express-session';
 import router from './routes/routes.js';
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -26,6 +27,6 @@ app.use(
 // Code for router 
 app.use("/", router);
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('Server listening on 3000');
 });

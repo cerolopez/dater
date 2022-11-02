@@ -6,8 +6,6 @@ const router = express.Router();
 import myDB from "../db/MyMongoDB.js";
 import datesDB from "../db/datesDB.js";
 
-//export const PORT = process.env.PORT || 3000;
-
 router.post('/sign-up', async (req, res) => {
   const user = req.body;
   const name = req.body.name;
