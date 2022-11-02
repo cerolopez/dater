@@ -1,3 +1,4 @@
+  /* code by Tim and Cecilia */
   html {
     font-family: "Public Sans", sans-serif;
     font-size: 20px;
@@ -135,7 +136,7 @@
     font-style: underline;
   }
 
-  #btnSignUp, #btnSettings, #btnSave {
+  #btnSignUp, #btnSettings, #btnSave, #btnQs, #btnSurvey {
     background-color: #FFB698;
     color: black;
     border: white;

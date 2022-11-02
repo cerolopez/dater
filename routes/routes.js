@@ -1,27 +1,12 @@
 // Made by both Tim and Cecilia
 import express from 'express';
-import path from 'path';
-//import { fileURLToPath } from 'url';
-
-// const __filename = fileURLToPath(import.meta.url);
-
-// move this to app.js so i can use above
-const __dirname = '/Users/cecilialopez/Desktop/web-dev/dater-app/dater';
 
 const router = express.Router();
 
 import myDB from "../db/MyMongoDB.js";
 import datesDB from "../db/datesDB.js";
-import surveyDB from "../db/surveyDB.js";
 
-//Is this needed??
 //export const PORT = process.env.PORT || 3000;
-
-import bodyParser from "body-parser";
-
-
-// begin example code
-
 
 router.post('/sign-up', async (req, res) => {
   const user = req.body;
@@ -29,9 +14,7 @@ router.post('/sign-up', async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-
   let result = await myDB.createUser(name, email, password);
-  
   console.log(result);
 
   if (result) {
@@ -43,13 +26,10 @@ router.post('/sign-up', async (req, res) => {
     req.session.user = null;
     res.json({ isCreated: false, isLoggedIn: false, err: "An account is already registered with given email. Try again." });
   }
-
-  
 });
 
 router.post('/authenticate(.html)?', async (req, res) => {
   const user = req.body;
-  
   if (await myDB.authenticate(user)) {
     // NEW ADDITION
     req.session.user = user;
@@ -75,7 +55,6 @@ router.post("/update-account", async (req, res) => {
   } else {
     res.json({isUpdated: false, err: "Something went wrong."});
   }
-
 });
 
 router.get("/deleteAccount", async (req, res) => {
@@ -88,9 +67,7 @@ router.get("/deleteAccount", async (req, res) => {
   }
 })
 
-
 router.get('/getUser', (req, res) => {
-
   res.json({
     isLoggedIn: !!req.session.user,
     user: req.session.user
@@ -107,7 +84,6 @@ router.post('/postSurvey', async (req, res) => {
 
   const newSurvey = await datesDB.submitSurvey(responses, currentUserEmail, dateID);
   res.json(newSurvey)
-
 });
 
 router.get('/getDates', async (req, res) => {
@@ -122,7 +98,6 @@ router.get('/getDates', async (req, res) => {
 
   // gets data from datesDB.js and sends it to clientDates.js
   return res.json(dates);
-
 });
 
 router.get('/getDate', async (req, res) => {
@@ -155,11 +130,9 @@ router.post('/create-date', async (req, res) => {
   } else {
     res.json({datePosted: false, err: "Please enter another registered user."})
   }
-
 });
-// TEST
-router.get('/sign-out', (req, res) => {
 
+router.get('/sign-out', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       res.json({isSuccessful: false, errMsg: "Unable to sign out"});
@@ -167,9 +140,6 @@ router.get('/sign-out', (req, res) => {
       res.json({isSuccessful: true, errMsg: null});
     }
   });
-
 });
-
-
 
 export default router;
