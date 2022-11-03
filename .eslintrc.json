@@ -11,5 +11,8 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        //This is just an example of rules, not as same as John's requirment 
+        eqeqeq: 0, 
+        curly: 2 
     }
 }
