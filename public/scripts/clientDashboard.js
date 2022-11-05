@@ -33,6 +33,7 @@ function ClientDashboard() {
         });
     }
     return clientDash;
+    // code review by Ming Hsiu Lee
 }
 
 export default ClientDashboard();
