@@ -1,7 +1,7 @@
 // Made by both Tim and Cecilia
 import express from 'express';
-import myMongoDB from './db/MyMongoDB.js';
-import datesDB from './db/datesDB.js';
+import myDB from '../db/MyMongoDB.js';
+import datesDB from '../db/datesDB.js';
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.post('/sign-up', async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  let result = await myMongoDB.createUser(name, email, password);
+  let result = await myDB.createUser(name, email, password);
   console.log(result);
 
   if (result) {
@@ -27,12 +27,12 @@ router.post('/sign-up', async (req, res) => {
 
 router.post('/authenticate(.html)?', async (req, res) => {
   const user = req.body;
-  if (await myMongoDB.authenticate(user)) {
+  if (await myDB.authenticate(user)) {
     // NEW ADDITION
     req.session.user = user;
     req.session.user.isLoggedIn = true;
     // NEW CODE -- TESTING
-    req.session.user.name = await myMongoDB.getName(user);
+    req.session.user.name = await myDB.getName(user);
     //
     console.log(req.session);
     res.json({isLoggedIn: true, err: null});
@@ -45,7 +45,7 @@ router.post('/authenticate(.html)?', async (req, res) => {
 router.post("/update-account", async (req, res) => {
   const user = req.body;
   // FINISH
-  const result = await myMongoDB.updateAccount(req.session.user.email, user.name, user.email, user.password);
+  const result = await myDB.updateAccount(req.session.user.email, user.name, user.email, user.password);
   if (result) {
     req.session.user = user;
     res.json({isUpdated: true, err: null});
@@ -55,7 +55,7 @@ router.post("/update-account", async (req, res) => {
 });
 
 router.get("/deleteAccount", async (req, res) => {
-  const result = await myMongoDB.deleteAccount(req.session.user.email);
+  const result = await myDB.deleteAccount(req.session.user.email);
   if (result) {
     req.session.user = null;
     res.json({isDeleted: true, err: null});
