@@ -27,6 +27,8 @@ HTML, CSS, JavaScript, Node.js, Express, and MongoDB
 * Open the terminal and enter the project
 * run % python3 -m http.server 8080
 * enter % reload -b to get automatic updates if you change the code
+// code review by Ming Hsiu Lee
+// followed the instruction, still can't run the file locally
 
 ### If you want to view on deployed site...
 * Stay tuned!
