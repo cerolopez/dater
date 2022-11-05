@@ -1,6 +1,6 @@
 // Made by both Tim and Cecilia
 import express from 'express';
-import myDB from '../db/MyMongoDB.js';
+//import myDB from '../db/MyMongoDB.js';
 import datesDB from '../db/datesDB.js';
 
 const router = express.Router();
